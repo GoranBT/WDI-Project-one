@@ -1,3 +1,149 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background:#ccc;
+}
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Header style
+
+header {
+  height: 50px;
+  width: 100%
+}
+  //Logo
+.logo{
+margin-left: 20px;
+}
+
+//Navigation
+nav {
+  margin-right: 35px;
+}
+nav ul li {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+// Page style
+
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin: 0 auto;
+}
+
+// Left column
+.columnLeft{
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+ //left collumn wrapper
+.columnLeftWrapper {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+//quotes
+.quotes {
+width: 98%;
+height: 65%;
+margin-bottom: 20px;
+}
+
+//player
+.player {
+  width: 90%;
+  height: 30%;
+}
+//just a border box class
+.box {
+  border: 2px solid red;
+}
+
+
+//Middle column
+.columnMiddle {
+  width: 60%;
+  text-align: center;
+}
+.title {
+  font-size: 20px;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.gameContainer {
+  min-width: 100%;
+  height: 500px;
+}
+.livesScoreWraper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.livesScoreWraper, .buttonWrapper, .tittle {
+  padding: 10px;
+}
+//Right column
+.columnRight {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+.columnRightWrapper {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.playerInfo {
+  width: 98%;
+  height: 65%;
+  margin-top: 20px;
+}
+.playerImage {
+  width: 90%;
+  height: 30%;
+}
+
+//Footer
+footer {
+  width: 100%;
+  height: 50px;
+}
+//Footer navigation
+nav {
+  padding-right: 20px;
+}
+nav a {
+  padding: 0 15px;
+}
+nav a img {
+  width: 25px;
+  height: 25px;
+}
+//footer made by
+#madeBy {
+  margin-left: 25px;
 }
