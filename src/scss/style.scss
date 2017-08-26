@@ -71,7 +71,7 @@ nav ul li {
 .quotes {
   font-size: 16px;
   text-align: center;
-  line-height: 1.7;
+  line-height: 2.3;
 width: 98%;
 height: 65%;
 margin-bottom: 20px;
@@ -178,7 +178,14 @@ input {
 
 }
 .player-info {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   display: none;
+}
+.player-info div {
+  margin: 25px 10px;
 }
 .pImage {
   margin-top: 15px;
