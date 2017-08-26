@@ -72,20 +72,38 @@
     <section class="columnRight box flexContainer">
       <div class="columnRightWrapper">
         <div class="playerImage box">
+          <div class="pImage box">
+
+          </div>
         </div>
         <div class="playerInfo box">
-          <form class="" action="index.html" method="post">
+          <div class="player-info">
             <div class="">
-<label for="">Name</label>
-              <input type="text" name="" value="name" placeholder="Name">
+              <p class="time"></p>
             </div>
             <div class="">
-              <label for="">Surname</label>
-              <input type="text" name="" value="surname" placeholder="Surname">
+              <p>Name: <span class="name"></span></p>
             </div>
-            <label for="">Age</label>
             <div class="">
-              <input type="number" name="" value="age" placeholder="Age">
+              <p>Score: <span class="score"></span></p>
+            </div>
+            <div class="">
+              <p>Level: <span class="level"></span></p>
+            </div>
+            <button type="newplayer">New Player</button>
+          </div>
+          <form class="" method="post" onsubmit="return false;">
+            <div class="">
+              <label for="name">Name</label>
+              <input type="text" name="name" value="dhfasdhj" placeholder="Name">
+            </div>
+            <div class="">
+              <label for="surname">Surname</label>
+              <input type="text" name="surname" value="" placeholder="Surname">
+            </div>
+            <label for="age">Age</label>
+            <div class="">
+              <input type="number" name="age" value="" placeholder="Age">
             </div>
             <button class='submit' type="submit">Submit</button>
           </form>
