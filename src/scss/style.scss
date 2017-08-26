@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Helvetica;
 }
 
 body {
@@ -22,7 +23,14 @@ header {
 }
   //Logo
 .logo{
-margin-left: 20px;
+  display: flex;
+  margin-left: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo img {
+  width: 100px;
+  height: auto;
 }
 
 //Navigation
@@ -101,7 +109,22 @@ margin-bottom: 20px;
 }
 
 .livesScoreWraper, .buttonWrapper, .tittle {
+  width: 100%;
+  display: flex;
   padding: 10px;
+  justify-content: space-between;
+  margin: 0 30px;
+}
+.buttonWrapper #start, #reset{
+  padding: 2px 40px;
+}
+button {
+  padding:0 10px;
+  font-size: 20px;
+  border-radius: 20px;
+}
+.player, .quotes, .playerImage, .playerInfo{
+  border-radius: 20px;
 }
 //Right column
 .columnRight {
@@ -118,9 +141,19 @@ margin-bottom: 20px;
     flex-wrap: wrap;
 }
 .playerInfo {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 98%;
   height: 65%;
   margin-top: 20px;
+}
+form {
+  width: 80%
+}
+input {
+  margin: 10px 0;
 }
 .playerImage {
   width: 90%;
