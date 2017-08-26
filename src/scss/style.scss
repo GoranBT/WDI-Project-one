@@ -72,18 +72,14 @@ nav ul li {
   font-size: 16px;
   text-align: center;
   line-height: 2.3;
-width: 98%;
-height: 65%;
-margin-bottom: 20px;
-padding: 15px;
-display: flex;
-justify-content: center;
-flex-direction: column;
+  width: 98%;
+  height: 65%;
+  margin-bottom: 20px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
-// .quotes p {
-//   display: flex
-//   justify-content: center;
-// }
 
 //player
 .player {
@@ -110,15 +106,17 @@ flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
 }
+//main game container
 .gameContainer {
   min-width: 100%;
   height: 500px;
 }
+//lives and score section
 .livesScoreWraper {
   display: flex;
   justify-content: space-between;
 }
-
+//main game sections style
 .livesScoreWraper, .buttonWrapper, .tittle {
   width: 100%;
   display: flex;
@@ -126,6 +124,7 @@ flex-direction: column;
   justify-content: space-between;
   margin: 0 30px;
 }
+//Start reset button style
 .buttonWrapper #start, #reset{
   padding: 2px 40px;
 }
@@ -143,6 +142,7 @@ button {
   display: flex;
   justify-content: center;
 }
+// right column wrapper
 .columnRightWrapper {
     width: 80%;
     height: 80%;
@@ -151,6 +151,7 @@ button {
     align-items: center;
     flex-wrap: wrap;
 }
+// player information
 .playerInfo {
   text-align: center;
   display: flex;
@@ -160,12 +161,14 @@ button {
   height: 65%;
   margin-top: 20px;
 }
+// Form section
 form {
   width: 80%
 }
 input {
   margin: 10px 0;
 }
+// Player image section
 .playerImage {
   width: 90%;
   height: 30%;
@@ -177,6 +180,7 @@ input {
   top: 10px;
 
 }
+// player information
 .player-info {
 
   display: flex;
@@ -187,6 +191,7 @@ input {
 .player-info div {
   margin: 25px 10px;
 }
+// player face image
 .pImage {
   margin-top: 15px;
   position: absolute;

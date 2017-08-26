@@ -1,4 +1,5 @@
 $(()=> {
+  // test object
   const users = {
     'Goran Angelovski': {
       name: 'Goran',
@@ -7,6 +8,10 @@ $(()=> {
     }
 
   };
+
+
+
+  // variables
   let $currentTime = null;
   const $newPlayer = $('.newplayer');
   const $PlayerFace = $('.pImage');
@@ -18,13 +23,16 @@ $(()=> {
 
   const player = {};
 
+  // Right column Logic
+
+  // Timer
   setInterval(function time() {
     $currentTime = new Date();
     var timeString = $currentTime.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
     $('.time').text(timeString);
   }, 1000);
 
-
+  // submit login function
   function submitLogin(event){
     const $current = $(event.currentTarget);
     player.name = $current.find('input[name="name"]').val();
@@ -38,6 +46,7 @@ $(()=> {
     $playerInformation.find('.level').text('Newbie');
 
   }
+  // clean from function
   function cleanForm() {
     $PlayerFace.css('background-image','none');
     $playerInformation.find('.level').text('');
@@ -48,7 +57,7 @@ $(()=> {
     $('form').show();
 
   }
+  // buttons onclick
   $('form').bind('submit', submitLogin);
-
   $newPlayer.click(cleanForm);
 });
