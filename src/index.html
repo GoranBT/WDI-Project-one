@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>WDI Project 1</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- inject:js -->
   <!-- endinject -->
@@ -22,9 +23,9 @@
     <!-- Navigation -->
     <nav>
       <ul>
-        <a href='#'><li>High Score</li></a>
-        <a href='#'><li>About me</li></a>
-        <a href='#'><li>About</li></a>
+        <a href="#"><li>High Score</li></a>
+        <a href="#"><li>About me</li></a>
+        <a href="#"><li>About</li></a>
       </ul>
     </nav>
   </header>
@@ -52,11 +53,11 @@
       <div class="wrapper box">
         <!-- lives and score holder -->
         <div class="livesScoreWraper box">
-          <div class="lives">
+          <div id="lives">
             Lives
           </div>
           <div class="score">
-            Score: <span class="result">0</span>
+            Score: <span id="result">0</span>
           </div>
         </div>
         <div class="gameContainer box">
@@ -64,8 +65,8 @@
         </div>
         <!-- button wrapper -->
         <div class="buttonWrapper flexContainer box">
-          <button id='start'>start</button>
-          <button id='reset'>reset</button>
+          <button id="start">start</button>
+          <button id="reset">reset</button>
         </div>
       </div>
     </section>
@@ -121,7 +122,7 @@
               <input type="number" name="age" value="" placeholder="Age">
             </div>
             <!-- submit button -->
-            <button class='submit' type="submit">Submit</button>
+            <button class="submit" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -135,9 +136,14 @@
 
       <!-- footer follow me nav -->
       <nav>
-        <a href='#'><img src="images/facebook.png" alt="Facebook image"></a>
-        <a href='#'><img src="images/twitter.png" alt="Twitter image"></a>
-        <a href='#'><img src="images/github.png" alt="GitHub image"></a>
+<ul>
+
+
+      <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>
+</a></li>
+      <li><a href="#"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+      <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+</ul>
       </nav>
     </footer>
   </div>

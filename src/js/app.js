@@ -23,6 +23,26 @@ $(()=> {
 
   const player = {};
 
+  //Game variables
+  let play = false;
+  let livesLeft = null;
+  let steps = null;
+  let action = null;
+  const icons =['html', 'css', 'js', 'ruby', 'facebook', 'instagram', 'twitter', 'nodejs', 'java', 'c#', 'python'];
+  let $result = $('#result');
+  const $lives = $('#lives');
+  $('#start').onclick(function () {
+    play = true;
+    livesLeft = 3;
+    console.log(livesLeft, play);
+  });
+  $('#reset').onclick(function () {
+    $result = 0;
+    play = false;
+    console.log($result, $lives, icons);
+  });
+
+
   // Right column Logic
 
   // Timer
