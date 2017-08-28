@@ -1,3 +1,4 @@
+
 $(()=> {
   // test object
   const users = {
@@ -87,5 +88,14 @@ $(()=> {
   }, function () {
     $(this).find('ul.child').hide(400);
   });
+
+  $('.player').on('click', function () {
+    $('.player').toggleClass('animated pulse infinity');
+
+
+  });
+
+
+  $('.logo').toggleClass('animated shake');
 
 });

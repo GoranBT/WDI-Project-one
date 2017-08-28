@@ -102,12 +102,12 @@ nav ul li .child {
   background-color: #ccf;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  background-image: url('../images/audio3.jpg');
+  background-position: center;
+  background-size: cover;
 }
-.player img {
-  width: 120px;
-  height: 120px;
-}
+
 //just a border box class
 .box {
   border: 2px solid red;
@@ -223,7 +223,6 @@ input {
   display: flex;
   justify-content: center;
   top: 10px;
-
 }
 // player information
 .player-info {
