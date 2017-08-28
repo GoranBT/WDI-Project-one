@@ -43,6 +43,13 @@ nav ul li {
   display: inline-block;
   padding: 0 10px;
 }
+nav ul li .child {
+  display: none;
+  position: absolute;
+  background-color: rgba(192, 192, 192, 0.9);
+  font-size: 14px;
+  width: 100%!important;
+}
 
 // Page style
 

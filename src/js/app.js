@@ -9,8 +9,6 @@ $(()=> {
 
   };
 
-
-
   // variables
   let $currentTime = null;
   const $newPlayer = $('.newplayer');
@@ -80,5 +78,11 @@ $(()=> {
   // buttons onclick
   $('form').bind('submit', submitLogin);
   $newPlayer.click(cleanForm);
+
+  $('ul.parent > li').hover(function() {
+    $(this).find('ul.child').show(400);
+  }, function () {
+    $(this).find('ul.child').hide(400);
+  });
 
 });
