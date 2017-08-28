@@ -80,4 +80,5 @@ $(()=> {
   // buttons onclick
   $('form').bind('submit', submitLogin);
   $newPlayer.click(cleanForm);
+
 });

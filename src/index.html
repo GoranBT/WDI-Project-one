@@ -21,15 +21,15 @@
     </div>
 
     <!-- Navigation -->
-    <nav>
+    <nav class="dropdown">
       <ul>
-        <a href="#"><li>High Score</li></a>
-        <a href="#"><li>About me</li></a>
-        <ul>
+        <li><a href="#">High Score</a></li>
+        <li><a href="#">About me</a></li>
+        <ul class="dropdown">
           <li>Nothing fun just a junior developer creating his first game!</li>
         </ul>
-        <a href="#"><li>About</li></a>
-        <ul>
+        <li><a class="dropbtn" href="#">About</a></li>
+        <ul class="dropdown">
           <li>About this game</li>
         </ul>
       </ul>
@@ -45,6 +45,7 @@
         <div class="quotes box">
         </div>
         <div class="player box">
+          <img class="spin" src="images/audiocopy.png" alt="spin">
         </div>
       </div>
     </section>
@@ -90,18 +91,19 @@
         </div>
         <!-- Player info box default: hidden -->
         <div class="playerInfo box">
-          <div class="player-info">
+
             <!-- time -->
-            <div class="">
-              <p class="time"></p>
-            </div>
+            <p class="time box"></p>
+
+          <div class="player-info box">
+
             <!-- name -->
             <div class="">
               <p>Name: <span class="name"></span></p>
             </div>
             <!-- score -->
             <div class="">
-              <p>Score: <span class="score"></span></p>
+              <p>Score: <span class="score">00</span></p>
             </div>
             <!-- level -->
             <div class="">
@@ -111,7 +113,7 @@
             <button class="newplayer">New Player</button>
           </div>
           <!-- form colection user information default:vissible-->
-          <form class="" method="post" onsubmit="return false;">
+          <form class="box" method="post" onsubmit="return false;">
             <!-- name -->
             <div class="">
               <label for="name">Name</label>
@@ -142,13 +144,10 @@
 
       <!-- footer follow me nav -->
       <nav>
-<ul>
-
-
-      <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>
-</a></li>
-      <li><a href="#"><i class="fa fa-github" aria-hidden="true"></i></a></li>
-      <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+<ul id="spin2">
+      <li><a href="#"><img  src="images/facebook.png" alt=""></a></li>
+      <li><a href="#"><img  src="images/twitter.png" alt=""></a></li>
+      <li><a href="#"><img  src="images/github.png" alt=""></a></li>
 </ul>
       </nav>
     </footer>
