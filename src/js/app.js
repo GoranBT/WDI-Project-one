@@ -29,6 +29,8 @@ $(()=> {
   const icons =['html', 'css', 'js', 'ruby', 'facebook', 'instagram', 'twitter', 'nodejs', 'java', 'c#', 'python'];
   let $result = $('#result');
   const $lives = $('#lives');
+
+  //game buttons
   $('#start').on('click', function () {
     play = true;
     livesLeft = 3;
@@ -79,6 +81,7 @@ $(()=> {
   $('form').bind('submit', submitLogin);
   $newPlayer.click(cleanForm);
 
+  //DropDown elements
   $('ul.parent > li').hover(function() {
     $(this).find('ul.child').show(400);
   }, function () {

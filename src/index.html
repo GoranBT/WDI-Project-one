@@ -14,6 +14,7 @@
 
   <!-- Header section -->
   <header class="box flexContainer">
+
     <!-- Logo -->
     <div class="logo box">
       <img src="images/Logo.png" alt="Logo image box">
@@ -25,80 +26,93 @@
       <ul class="parent">
         <li><a href="#">High Score</a></li>
         <li><a href="#">About me</a>
-        <ul class="child">
-          <li>Nothing fun just a junior developer creating his first game!</li>
-        </ul>
+          <!-- drop down -->
+          <ul class="child">
+            <li>Nothing fun just a junior developer creating his first game!</li>
+          </ul>
         </li>
         <li><a href="#">About</a>
-        <ul class="child">
-          <li>About this game</li>
-        </ul>
+          <!-- drop down -->
+          <ul class="child">
+            <li>About this game</li>
+          </ul>
         </li>
       </ul>
     </nav>
   </header>
-  <!-- end of header -->
+  <!-- End of header -->
 
-  <!-- main page container -->
+  <!-- Main page container -->
   <div class="page box">
     <!-- Left column -->
     <section class="columnLeft flexContainer box">
       <div class="columnLeftWrapper flexContainer">
+
+        <!-- Quotes container -->
         <div class="quotes box">
         </div>
+
+        <!-- Audio player -->
         <div class="player box">
           <img class="spin" src="images/audiocopy.png" alt="spin">
         </div>
+
       </div>
     </section>
 
     <!-- Main middle column -->
-
     <section class="columnMiddle box">
-      <!-- tittle -->
+      <!-- Tittle -->
       <div class="title">
         <h2>Code Ninja</h2>
       </div>
+
       <div class="wrapper box">
-        <!-- lives and score holder -->
+
+        <!-- Lives and Score container -->
         <div class="livesScoreWraper box">
           <div id="lives">
             Lives
           </div>
+
           <div class="score">
+            <!-- Span used to update score -->
             Score: <span id="result">0</span>
           </div>
         </div>
-        <div class="gameContainer box">
 
+        <!-- Container used for the game -->
+        <div class="gameContainer box">
         </div>
+
         <!-- button wrapper -->
         <div class="buttonWrapper flexContainer box">
           <button id="start">start</button>
           <button id="reset">reset</button>
         </div>
+
       </div>
     </section>
 
     <!-- Right column -->
-
     <section class="columnRight box flexContainer">
-      <div class="columnRightWrapper">
-        <!-- //container for the ninja image -->
-        <div class="playerImage box">
-          <!-- container for face image -->
-          <div class="pImage box">
 
-          </div>
+      <div class="columnRightWrapper">
+
+        <!-- Container for the ninja image -->
+        <div class="playerImage box">
+          <!-- Container for the face image -->
+          <div class="pImage box"></div>
         </div>
-        <!-- Player info box default: hidden -->
+
+        <!-- Player info box default: HIDDEN -->
         <div class="playerInfo box">
 
-            <!-- time -->
-            <p class="time box"></p>
+          <!-- time -->
+          <p class="time box"></p>
 
+          <!-- Name score level information container-->
           <div class="player-info box">
-
             <!-- name -->
             <div class="">
               <p>Name: <span class="name"></span></p>
@@ -111,10 +125,12 @@
             <div class="">
               <p>Level: <span class="level"></span></p>
             </div>
+
             <!-- new player button -->
             <button class="newplayer">New Player</button>
           </div>
-          <!-- form colection user information default:vissible-->
+
+          <!-- form colection user information default:VISSIBLE-->
           <form class="box" method="post" onsubmit="return false;">
             <!-- name -->
             <div class="">
@@ -137,20 +153,20 @@
         </div>
       </div>
     </section>
+
     <!-- Footer section -->
-
     <footer class="box flexContainer">
-      <!-- made by -->
 
+      <!-- Made by -->
       <span id="madeBy">Made by Goran Angelovski</span>
 
-      <!-- footer follow me nav -->
+      <!-- Footer follow me nav -->
       <nav>
-<ul id="spin2">
-      <li><a href="#"><img  src="images/facebook.png" alt=""></a></li>
-      <li><a href="#"><img  src="images/twitter.png" alt=""></a></li>
-      <li><a href="#"><img  src="images/github.png" alt=""></a></li>
-</ul>
+        <ul id="spin2">
+          <li><a href="#"><img  src="images/facebook.png" alt="facebook image"></a></li>
+          <li><a href="#"><img  src="images/twitter.png" alt="twitter image"></a></li>
+          <li><a href="#"><img  src="images/github.png" alt="github image"></a></li>
+        </ul>
       </nav>
     </footer>
   </div>

@@ -19,15 +19,17 @@ body {
 
 header {
   height: 50px;
-  width: 100%
+  width: 100%;
 }
-  //Logo
+
+//Logo
 .logo{
   display: flex;
   margin-left: 20px;
   justify-content: space-between;
   align-items: center;
 }
+
 .logo img {
   width: 60px;
   height: auto;
@@ -37,12 +39,14 @@ header {
 nav {
   margin-right: 35px;
 }
+
 nav ul li {
   position: relative;
   text-decoration: none;
   display: inline-block;
   padding: 0 10px;
 }
+//drop down section
 nav ul li .child {
   display: none;
   position: absolute;
@@ -66,7 +70,8 @@ nav ul li .child {
   display: flex;
   justify-content: center;
 }
- //left collumn wrapper
+
+//left collumn wrapper
 .columnLeftWrapper {
   width: 80%;
   height: 80%;
@@ -75,6 +80,7 @@ nav ul li .child {
   align-items: center;
   flex-wrap: wrap;
 }
+
 //quotes
 .quotes {
   font-size: 16px;
@@ -89,13 +95,10 @@ nav ul li .child {
   flex-direction: column;
 }
 
-//player
+//audio player
 .player {
   width: 90%;
   height: 30%;
-  background-position: center;
-  background-size:  cover;
-  background-repeat: no-repeat;
   background-color: #ccf;
   display: flex;
   justify-content: center;
@@ -110,31 +113,37 @@ nav ul li .child {
   border: 2px solid red;
 }
 
-
 //Middle column
 .columnMiddle {
   width: 60%;
   text-align: center;
 }
+
+// Code Ninja title
 .title {
   font-size: 20px;
 }
+
+//middle column wrapper
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
+
 //main game container
 .gameContainer {
   min-width: 100%;
   height: 500px;
 }
+
 //lives and score section
 .livesScoreWraper {
   display: flex;
   justify-content: space-between;
 }
+
 //main game sections style
 .livesScoreWraper, .buttonWrapper, .tittle {
   width: 100%;
@@ -143,33 +152,39 @@ nav ul li .child {
   justify-content: space-between;
   margin: 0 30px;
 }
+
 //Start reset button style
 .buttonWrapper #start, #reset{
   padding: 2px 40px;
 }
+
 button {
   padding:0 10px;
   font-size: 20px;
   border-radius: 20px;
 }
+
 .player, .quotes, .playerImage, .playerInfo{
   border-radius: 20px;
 }
+
 //Right column
 .columnRight {
   width: 20%;
   display: flex;
   justify-content: center;
 }
+
 // right column wrapper
 .columnRightWrapper {
-    width: 80%;
-    height: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
 // player information
 .playerInfo {
   display: flex;
@@ -181,18 +196,23 @@ button {
   margin-top: 20px;
   flex-wrap: wrap;
 }
+
+//time container
 .dateTime {
   width: 100%;
   height: 20%;
 }
+
 // Form section
 form {
   width: 80%;
   height: 80%;
 }
+
 input {
   margin: 15px 0;
 }
+
 // Player image section
 .playerImage {
   width: 90%;
@@ -213,9 +233,12 @@ input {
   align-items: center;
   display: none;
 }
+
+//
 .player-info div {
   margin: 30px 20px;
 }
+
 // player face image
 .pImage {
   margin-top: 15px;
@@ -226,30 +249,33 @@ input {
   background-size: cover;
   background-position: center;
 }
+
 //Footer
 footer {
   width: 100%;
   height: 50px;
 }
-//Footer navigation
 
+//Footer navigation
 nav {
   padding-right: 20px;
 }
+
 nav li a {
   padding: 0 15px;
 }
+
 nav li a img {
   width: 25px;
   height: 25px;
 }
+
 //footer made by
 #madeBy {
   margin-left: 25px;
 }
-.icon:hover {
-  // color
-}
+
+//Icon -spin
 #spin2 li a img{
   -webkit-transition: all 0.6s ease-in-out;
   -moz-transition: all 0.6s ease-in-out;
