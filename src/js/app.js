@@ -1,12 +1,20 @@
 
 $(()=> {
+
   const myAudio = new Audio('images/audio1.mp3');
+  const slice = new Audio('images/slice.mp3');
   // test object
   const users = {
     'Goran Angelovski': {
       name: 'Goran',
       surname: 'Angelovski',
       image: 'images/goran.jpg'
+    },
+    'Mike Hayden': {
+      name: 'Mike',
+      surname: 'Hayden',
+      image: 'images/mike.png'
+
     }
 
   };
@@ -43,7 +51,6 @@ $(()=> {
     }
   }
 
-
   //change icon using attr src and random array number
   function chooseIcon(){
     const image = icons[Math.floor(Math.random() * 7)];
@@ -53,6 +60,7 @@ $(()=> {
 
   //start function -> makes the icon to show up by setting the att source
   function start(){
+    $newPlayer.hide();
     console.log('inside start');
     $('#gameOver').hide();
     $lives.show();
@@ -84,6 +92,7 @@ $(()=> {
           step = 1 + Math.round(Math.random()*2);
           livesLeft--;
           addHearths();
+          $lives.show();
           console.log('lost a life');
         }else{
           clearInterval(action);
@@ -95,6 +104,7 @@ $(()=> {
     }, 10);
   }
   $('#icon1').on('mouseover', function (){
+    slice.play();
     score++;
     $('.score').html(score);
     clearInterval(action);
@@ -106,8 +116,8 @@ $(()=> {
   //game buttons
   $('#start').on('click', start);
   $('#reset').on('click', function () {
-    $result = 0;
-    console.log($result, $lives, icons);
+
+
   });
 
 
@@ -120,6 +130,8 @@ $(()=> {
 
   // submit login function
   function submitLogin(event){
+    $('#start').show();
+    $('#reset').show();
     const $current = $(event.currentTarget);
     player.name = $current.find('input[name="name"]').val();
     player.surname = $current.find('input[name="surname"]').val();
@@ -141,7 +153,8 @@ $(()=> {
     $playerInformation.find('.age').text(' ');
     $playerInformation.hide();
     $('form').show();
-
+    $('#start').hide();
+    $('#reset').hide();
   }
   // buttons onclick
   $('form').bind('submit', submitLogin);
@@ -154,7 +167,7 @@ $(()=> {
     $(this).find('ul.child').hide(400);
   });
 
-
+  //Audio Player
   $('.player').on('click', function(){
     if(myAudio.paused) {
       myAudio.play();
@@ -165,12 +178,8 @@ $(()=> {
     $('.player').toggleClass('pulse');
   });
 
-  
-
-
 
   $('.logo').toggleClass('animated shake');
-
 
 
 });
