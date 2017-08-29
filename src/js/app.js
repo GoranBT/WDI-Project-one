@@ -42,7 +42,13 @@ $(()=> {
     play = false;
     console.log($result, $lives, icons);
   });
-
+  //Game
+  function addHearths() {
+    livesLeft = 3;
+    for(let i = 0; i<livesLeft.length; i++){
+      $lives.append(' x ');
+    }
+  }
 
   // Right column Logic
 
@@ -65,7 +71,7 @@ $(()=> {
     $PlayerFace.css('background-image',`url(${img})`);
     $playerInformation.find('.name').text(player.name);
     $playerInformation.find('.level').text('Newbie');
-
+    console.log($PlayerFace, $playerInformation, $current);
   }
   // clean from function
   function cleanForm() {
@@ -89,13 +95,46 @@ $(()=> {
     $(this).find('ul.child').hide(400);
   });
 
-  $('.player').on('click', function () {
-    $('.player').toggleClass('animated pulse infinity');
+  // function pulsate(element) {
+  //   $(element || this).animate({ opacity: 0 }, 500, function() {
+  //     $(this).animate({ opacity: 1 }, 500, pulsate);
+  //   });
+  // }
 
-
+  $('.player').on('click', function(){
+    $('.player').toggleClass('pulse');
   });
 
 
+
   $('.logo').toggleClass('animated shake');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
