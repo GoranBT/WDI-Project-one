@@ -1,5 +1,6 @@
 
 $(()=> {
+  const myAudio = new Audio('images/audio1.mp3');
   // test object
   const users = {
     'Goran Angelovski': {
@@ -23,34 +24,84 @@ $(()=> {
   const player = {};
 
   //Game variables
-  let play = false;
   let livesLeft = null;
-  let steps = null;
+  let step = null;
   let action = null;
-  const icons =['html', 'css', 'js', 'ruby', 'facebook', 'instagram', 'twitter', 'nodejs', 'java', 'c#', 'python'];
+  const icons =['amazon', 'android', 'google', 'twitter', 'viber', 'whatsup', 'windows'];
   let $result = $('#result');
   const $lives = $('#lives');
+  let score = null;
 
-  //game buttons
-  $('#start').on('click', function () {
-    play = true;
-    livesLeft = 3;
-    console.log(livesLeft, play);
-  });
-  $('#reset').on('click', function () {
-    $result = 0;
-    play = false;
-    console.log($result, $lives, icons);
-  });
-  //Game
+
+
+  //adds hearths to the box
   function addHearths() {
-    livesLeft = 3;
-    for(let i = 0; i<livesLeft.length; i++){
-      $lives.append(' x ');
+    $lives.empty();
+    for(let i = 0; i<livesLeft; i++){
+      $lives.append('<img src="images/hearth.ico" class="life"/>');
+
     }
   }
 
-  // Right column Logic
+
+  //change icon using attr src and random array number
+  function chooseIcon(){
+    $('#icon1').attr('src' , 'images/' + icons[Math.round(Math.random() * icons.length)-1] +'.png');
+  }
+
+
+  //start function -> makes the icon to show up by setting the att source
+  function start(){
+    $lives.show();
+    livesLeft = 3;
+    addHearths();
+    $('#icon1').show();
+    chooseIcon();
+
+    //choose random icon start position
+    $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
+
+
+    //randomize step to increase speed and all of the icons drop with different speed
+    step = 1 + Math.round(Math.random()*5);
+
+
+    //interval set to change top position every 10ms
+    action = setInterval(function(){
+
+      //changes current top position + step
+      $('#icon1').css('top', $('#icon1').position().top + step);
+
+      //condition checking what heppens when icon position is > contaier
+      if($('#icon1').position().top > $('#iconsContainer').height()) {
+        if(livesLeft>1) {
+          $('#icon1').show();
+          chooseIcon();
+          $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
+          step = 1 + Math.round(Math.random()*5);
+          livesLeft--;
+          addHearths();
+        }else{
+          clearInterval(action);
+          $('#gameOver').show();
+
+        }
+      }
+    }, 10);
+  }
+
+
+
+
+
+
+  //game buttons
+  $('#start').on('click', start);
+  $('#reset').on('click', function () {
+    $result = 0;
+    console.log($result, $lives, icons);
+  });
+
 
   // Timer
   setInterval(function time() {
@@ -95,45 +146,17 @@ $(()=> {
     $(this).find('ul.child').hide(400);
   });
 
-  // function pulsate(element) {
-  //   $(element || this).animate({ opacity: 0 }, 500, function() {
-  //     $(this).animate({ opacity: 1 }, 500, pulsate);
-  //   });
-  // }
 
   $('.player').on('click', function(){
     $('.player').toggleClass('pulse');
+
+    myAudio.play();
+
   });
 
 
 
   $('.logo').toggleClass('animated shake');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -164,13 +164,21 @@ nav ul li .child {
   background-color: blue;
   border-radius: 10px;
   position: relative;
+  display: inline-block;
 }
 .life {
-  position: absolute;
+  display: inline;
   width: 16px;
   height: 16px;
   margin: 0 5px;
 }
+.icon {
+  height: 40px;
+  width: 40px;
+  display: none;
+  position: absolute;
+}
+
 //main game sections style
 
 
@@ -182,6 +190,7 @@ nav ul li .child {
   background-size: cover;
   position: relative;
   border-radius: 5%;
+  overflow: hidden;
 
 }
 
@@ -189,14 +198,17 @@ nav ul li .child {
   height: 500px;
   width: 90%;
   position: absolute;
-  display: none;
   border-radius: 5%;
+  img {
+    position: absolute;
+  }
 }
 
 #gameOver {
   position: absolute;
   display: none;
   border-radius: 5%;
+  z-index: 3;
 }
 
 .livesScoreWraper, .buttonWrapper, .tittle {
