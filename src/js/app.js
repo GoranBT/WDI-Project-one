@@ -156,11 +156,16 @@ $(()=> {
 
 
   $('.player').on('click', function(){
+    if(myAudio.paused) {
+      myAudio.play();
+    } else {
+      myAudio.pause();
+      myAudio.currentTime = 0;
+    }
     $('.player').toggleClass('pulse');
-
-    myAudio.play();
-
   });
+
+  
 
 
 
