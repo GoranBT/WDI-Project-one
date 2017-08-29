@@ -46,12 +46,15 @@ $(()=> {
 
   //change icon using attr src and random array number
   function chooseIcon(){
-    $('#icon1').attr('src' , 'images/' + icons[Math.round(Math.random() * icons.length)-1] +'.png');
+    const image = icons[Math.floor(Math.random() * 7)];
+    $('#icon1').attr('src' , 'images/' + image +'.png').attr('data-logo', image);
   }
 
 
   //start function -> makes the icon to show up by setting the att source
   function start(){
+    console.log('inside start');
+    $('#gameOver').hide();
     $lives.show();
     livesLeft = 3;
     addHearths();
@@ -63,7 +66,7 @@ $(()=> {
 
 
     //randomize step to increase speed and all of the icons drop with different speed
-    step = 1 + Math.round(Math.random()*5);
+    step = 1 + Math.round(Math.random()*2);
 
 
     //interval set to change top position every 10ms
@@ -78,23 +81,28 @@ $(()=> {
           $('#icon1').show();
           chooseIcon();
           $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
-          step = 1 + Math.round(Math.random()*5);
+          step = 1 + Math.round(Math.random()*2);
           livesLeft--;
           addHearths();
+          console.log('lost a life');
         }else{
           clearInterval(action);
           $('#gameOver').show();
+          console.log('game over');
 
         }
       }
     }, 10);
   }
-
-
-
-
-
-
+  $('#icon1').on('mouseover', function (){
+    score++;
+    $('.score').html(score);
+    clearInterval(action);
+    // $('#icon1').hide();
+    $('#icon1').hide('explode', 400);
+    console.log('hiding the icon');
+    setTimeout(start, 500);
+  });
   //game buttons
   $('#start').on('click', start);
   $('#reset').on('click', function () {
