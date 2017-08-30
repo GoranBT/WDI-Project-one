@@ -8,6 +8,10 @@
 body {
   background:#ccc;
 }
+//just a border box class
+.box {
+  border: 2px solid red;
+}
 
 .flexContainer {
   display: flex;
@@ -20,44 +24,46 @@ body {
 header {
   height: 40px;
   width: 100%;
-}
+  //Logo
+  .logo{
+    display: flex;
+    margin-left: 20px;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 60px;
+      height: auto;
+    }
+  }
+  //Navigation
+  nav {
+    margin-right: 35px;
+    ul {
+      text-decoration: none;
+      li {
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+        padding: 0 10px;
+        .child {
+          text-decoration: none;
+          display: none;
+          position: absolute;
+          background-color: rgba(192, 192, 192, 0.9);
+          font-size: 14px;
+          width: 100%!important;
+          border-radius: 5px;
+          z-index: 1;
 
-//Logo
-.logo{
-  display: flex;
-  margin-left: 20px;
-  justify-content: space-between;
-  align-items: center;
-}
+          a{
+            text-decoration: none;
+          }
+        }
 
-.logo img {
-  width: 60px;
-  height: auto;
+      }
+    }
+  }
 }
-
-//Navigation
-nav {
-  margin-right: 35px;
-}
-
-nav ul li {
-  position: relative;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0 10px;
-}
-//drop down section
-nav ul li .child {
-  display: none;
-  position: absolute;
-  background-color: rgba(192, 192, 192, 0.9);
-  font-size: 14px;
-  width: 100%!important;
-  border-radius: 5px;
-  z-index: 1;
-
-}
-
 // Page style
 
 .page {
@@ -65,161 +71,160 @@ nav ul li .child {
   flex-wrap: wrap;
   margin-top: 10px;
   margin: 0 auto;
-}
 
-// Left column
-.columnLeft{
-  width: 20%;
-  display: flex;
-  justify-content: center;
-}
+  // left column
+  .columnLeft{
+    width: 20%;
+    display: flex;
+    justify-content: center;
 
-//left collumn wrapper
-.columnLeftWrapper {
-  width: 80%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
+    //left collumn wrapper
+    .columnLeftWrapper {
+      width: 80%;
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
 
-//quotes
-.quotes {
-  font-size: 16px;
-  text-align: center;
-  line-height: 2.3;
-  width: 98%;
-  height: 65%;
-  margin-bottom: 20px;
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
+      //quotes
+      .quotes {
+        font-size: 16px;
+        text-align: center;
+        line-height: 2.3;
+        width: 98%;
+        height: 65%;
+        margin-bottom: 20px;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      //classes used for pulse animation
+      .animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
 
-//audio player
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.animated.infinite {
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-}
-
-.player {
-  width: 90%;
-  height: 30%;
-  background-color: #ccf;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  background-image: url('../images/audio3.jpg');
-  background-position: center;
-  background-size: cover;
-}
-
-//just a border box class
-.box {
-  border: 2px solid red;
-}
-
-//Middle column
-.columnMiddle {
-  width: 60%;
-  text-align: center;
-}
-
-// Code Ninja title
-.title {
-  font-size: 20px;
-}
-
-//middle column wrapper
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-//lives and score section
-.livesScoreWraper {
-  display: flex;
-  justify-content: space-between;
-}
-#lives {
-  height: 20px;
-  width: 120px;
-  background-color: blue;
-  border-radius: 10px;
-  position: relative;
-  display: inline-block;
-}
-.life {
-  display: inline;
-  width: 16px;
-  height: 16px;
-  margin: 0 5px;
-}
-.icon {
-  height: 40px;
-  width: 40px;
-  display: none;
-  position: absolute;
-}
-
-//main game sections style
-
-
-#mainGameContainer {
-  min-height: 500px;
-  min-width: 700px;
-  background-image: url('../images/back.jpg');
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  border-radius: 5%;
-  overflow: hidden;
-
-}
-#quizContainer {
-  min-width: 300px;
-  min-height: 250px;
-  background-color: blue;
-  z-index: 5;
-  display: none;
-}
-
-#iconsContainer {
-  height: 500px;
-  width: 100%;
-  position: absolute;
-  border-radius: 5%;
-  img {
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    display: none;
+      .animated.infinite {
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+      //audio player
+      .player {
+        width: 90%;
+        height: 30%;
+        background-color: #ccf;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        background-image: url('../images/audio3.jpg');
+        background-position: center;
+        background-size: cover;
+      }
+    }
   }
-}
 
-#gameOver {
-  min-width: 100%;
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  color: white;
-  position: absolute;
-  display: none;
-  border-radius: 5%;
-  z-index: 3;
+  //Middle column
+  .columnMiddle {
+    width: 60%;
+    text-align: center;
+
+    // Code Ninja title
+    .title {
+      font-size: 20px;
+    }
+
+    //middle column wrapper
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      //lives and score section
+      .livesScoreWraper {
+        display: flex;
+        justify-content: space-between;
+        //ives container
+        #lives {
+          height: 20px;
+          width: 120px;
+          background-color: blue;
+          border-radius: 10px;
+          position: relative;
+          display: inline-block;
+          //life image
+          .life {
+            display: inline;
+            width: 16px;
+            height: 16px;
+            margin: 0 5px;
+          }
+        }
+      }
+      //main container
+      #mainGameContainer {
+        min-height: 500px;
+        min-width: 700px;
+        background-image: url('../images/back.jpg');
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        border-radius: 5%;
+        overflow: hidden;
+        //icons container
+        #iconsContainer {
+          height: 500px;
+          width: 100%;
+          position: absolute;
+          border-radius: 5%;
+
+          img {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            display: none;
+          }
+          //icons style
+          .icon {
+            height: 40px;
+            width: 40px;
+            display: none;
+            position: absolute;
+          }
+          //quiz container default hidden shows when bonus icon been cut
+          #quizContainer {
+            min-width: 300px;
+            min-height: 250px;
+            background-color: blue;
+            z-index: 5;
+            display: none;
+          }
+          //game over container default hidden shows when game over
+          #gameOver {
+            min-width: 100%;
+            min-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            position: absolute;
+            display: none;
+            border-radius: 5%;
+            z-index: 3;
+          }
+        }
+      }
+    }
+    // button wrapper
+    .buttonWrapper{
+      min-height: 50px;
+    }
+  }
 }
 
 .livesScoreWraper, .buttonWrapper, .tittle {
@@ -233,10 +238,6 @@ nav ul li .child {
 //Start reset button style
 .buttonWrapper #start, #reset{
   padding: 2px 40px;
-
-}
-.buttonWrapper{
-  min-height: 50px;
 }
 
 button {
@@ -244,6 +245,7 @@ button {
   font-size: 20px;
   border-radius: 20px;
 }
+// hiding buttons
 #start, #reset {
   display: none;
 }
@@ -252,6 +254,7 @@ button {
   border-radius: 20px;
 }
 
+// ............
 //Right column
 .columnRight {
   width: 20%;
@@ -267,37 +270,50 @@ button {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-}
 
-// player information
-.playerInfo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 98%;
-  height: 65%;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
+  // player information
+  .playerInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 98%;
+    height: 65%;
+    margin-top: 20px;
+    flex-wrap: wrap;
 
-//time container
-.dateTime {
-  width: 100%;
-  height: 20%;
-}
+    // player information name score lvl container
+    .player-info {
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      display: none;
+
+      div {
+        margin: 30px 20px;
+      }
+    }
+
+    //time container
+    .dateTime {
+      width: 100%;
+      height: 20%;
+    }
+  }
 
 // Form section
-form {
-  width: 80%;
-  height: 80%;
+  form {
+    width: 80%;
+    height: 80%;
+
+    input {
+      margin: 15px 0;
+    }
+  }
 }
 
-input {
-  margin: 15px 0;
-}
-
-// Player image section
+// Player image section ninja container
 .playerImage {
   width: 90%;
   height: 30%;
@@ -307,69 +323,60 @@ input {
   display: flex;
   justify-content: center;
   top: 10px;
-}
-// player information
-.player-info {
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
 
-//
-.player-info div {
-  margin: 30px 20px;
+  // player face image
+  .pImage {
+    margin-top: 15px;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center;
+  }
 }
-
-// player face image
-.pImage {
-  margin-top: 15px;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  background-size: cover;
-  background-position: center;
-}
-
+// .............
 //Footer
 footer {
   width: 100%;
   height: 40px;
-}
 
-//Footer navigation
-nav {
-  padding-right: 20px;
-}
+  //footer made by
+  #madeBy {
+    margin-left: 25px;
+  }
 
-nav li a {
-  padding: 0 15px;
-}
+  //Footer navigation
+  nav {
+    padding-right: 20px;
+    li {
+      text-decoration: none;
+      display: inline-block;
 
-nav li a img {
-  width: 25px;
-  height: 25px;
-}
+      a {
+        padding: 0 15px;
 
-//footer made by
-#madeBy {
-  margin-left: 25px;
-}
+        img {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
 
-//Icon -spin
-#spin2 li a img{
-  -webkit-transition: all 0.6s ease-in-out;
-  -moz-transition: all 0.6s ease-in-out;
-  -o-transition: all 0.6s ease-in-out;
-  -ms-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
-}
-#spin2 li a img:hover{
-  -webkit-transform: rotate(360deg);
-  -o-transform: rotate(360deg);
-  -moz-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
-  transform: rotate(360deg);
+    // classes use for follow me animation
+    #spin2 li a img{
+      -webkit-transition: all 0.6s ease-in-out;
+      -moz-transition: all 0.6s ease-in-out;
+      -o-transition: all 0.6s ease-in-out;
+      -ms-transition: all 0.6s ease-in-out;
+      transition: all 0.6s ease-in-out;
+    }
+    #spin2 li a img:hover{
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 }
