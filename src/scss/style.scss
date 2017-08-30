@@ -147,12 +147,6 @@ nav ul li .child {
   flex-wrap: wrap;
 }
 
-//main game container
-// .gameContainer {
-//   min-width: 100%;
-//   height: 500px;
-// }
-
 //lives and score section
 .livesScoreWraper {
   display: flex;
@@ -192,6 +186,13 @@ nav ul li .child {
   border-radius: 5%;
   overflow: hidden;
 
+}
+.quizContaier {
+  min-width: 300px;
+  min-height: 250px;
+  background-color: blue;
+  z-index: 5;
+  display: none;
 }
 
 #iconsContainer {

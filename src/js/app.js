@@ -1,5 +1,38 @@
 
 $(()=> {
+//test
+  var quiz = [
+
+    {
+      'question': 'true||false',
+      'answer': 'true'
+    },
+    {
+      'question': 'true&&false',
+      'answer': 'false'
+    }
+
+  ];
+  var type=null;
+
+
+  function question(){
+    var selection = quiz[Math.round(Math.random() * 2)];
+    type = selection.answer;
+    $('.q').html(`<p>${selection.question}</p>`);
+  }
+
+  $('.quizButtons').on('click', function(){
+    console.log($(this).val());
+    if($(this).val() === type){
+      score =+ 10;
+      question();
+    } else {
+      question();
+    }
+  });
+
+  //end of test for today
 
   const myAudio = new Audio('images/audio1.mp3');
   const slice = new Audio('images/slice.mp3');
@@ -35,6 +68,7 @@ $(()=> {
   let livesLeft = null;
   let step = null;
   let action = null;
+  //icons
   const icons =['amazon', 'android', 'google', 'twitter', 'viber', 'whatsup', 'windows'];
   let $result = $('#result');
   const $lives = $('#lives');
@@ -42,14 +76,14 @@ $(()=> {
 
 
 
-  //adds hearths to the box
-  function addHearths() {
-    $lives.empty();
-    for(let i = 0; i<livesLeft; i++){
-      $lives.append('<img src="images/hearth.ico" class="life"/>');
-
-    }
-  }
+  // //adds hearths to the box
+  // function addHearths() {
+  //   $lives.empty();
+  //   for(let i = 0; i<livesLeft; i++){
+  //     $lives.append('<img src="images/hearth.ico" class="life"/>');
+  //
+  //   }
+  // }
 
   //change icon using attr src and random array number
   function chooseIcon(){
@@ -60,12 +94,15 @@ $(()=> {
 
   //start function -> makes the icon to show up by setting the att source
   function start(){
+    //hide new player button user cannot use it while playing
     $newPlayer.hide();
     console.log('inside start');
     $('#gameOver').hide();
     $lives.show();
+
+    //populate lives inside box and show random icon
     livesLeft = 3;
-    addHearths();
+    // addHearths();
     $('#icon1').show();
     chooseIcon();
 
@@ -85,43 +122,69 @@ $(()=> {
 
       //condition checking what heppens when icon position is > contaier
       if($('#icon1').position().top > $('#iconsContainer').height()) {
-        if(livesLeft>1) {
-          $('#icon1').show();
-          chooseIcon();
-          $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
-          step = 1 + Math.round(Math.random()*2);
-          livesLeft--;
-          addHearths();
-          $lives.show();
-          console.log('lost a life');
-        }else{
+
+        livesLeft--;
+        $lives.find('img').slice(0, 3-livesLeft).hide();
+
+        if(livesLeft === 0) {
           clearInterval(action);
           $('#gameOver').show();
-          console.log('game over');
-
+          $newPlayer.show();
+          return;
         }
+
+        $('#icon1').show();
+        chooseIcon();
+        $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
+        step = 1 + Math.round(Math.random()*2);
+        console.log('lost a life');
+
+
+        // if(livesLeft>1) {
+        //   $('#icon1').show();
+        //   chooseIcon();
+        //   $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
+        //   step = 1 + Math.round(Math.random()*2);
+        //   livesLeft--;
+        //   addHearths();
+        //   $lives.show();
+        //   console.log('lost a life');
+        // }else{
+        //   clearInterval(action);
+        //   $('#gameOver').show();
+        //   console.log('game over');
+        //   $newPlayer.show();
+        //
+        // }
       }
     }, 10);
   }
+
+  //mouse over function
   $('#icon1').on('mouseover', function (){
+    //play sound and increase and display score
     slice.play();
     score++;
     $('.score').html(score);
+    //stop interval for the explode event
     clearInterval(action);
-    // $('#icon1').hide();
     $('#icon1').hide('explode', 400);
     console.log('hiding the icon');
+    //start timer after the explode event
     setTimeout(start, 500);
   });
+
   //game buttons
   $('#start').on('click', start);
   $('#reset').on('click', function () {
-
-
+    $('#gameOver').hide();
+    $('.score').text(0);
+    $lives.find('img').show();
+    livesLeft = 3;
   });
 
 
-  // Timer
+  // Timer get and show the time
   setInterval(function time() {
     $currentTime = new Date();
     var timeString = $currentTime.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
@@ -180,6 +243,6 @@ $(()=> {
 
 
   $('.logo').toggleClass('animated shake');
-
+  $('.submit').toggleClass('animated pulse infinite');
 
 });
