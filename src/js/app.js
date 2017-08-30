@@ -14,21 +14,27 @@ $(()=> {
 
   ];
   var type=null;
-
+  var qscore = 12;
 
   function question(){
-    var selection = quiz[Math.round(Math.random() * 2)];
+    var selection = quiz[Math.floor(Math.random() * 2)];
     type = selection.answer;
-    $('.q').html(`<p>${selection.question}</p>`);
+    $('.question').html(`${selection.question}`);
   }
 
   $('.quizButtons').on('click', function(){
-    console.log($(this).val());
+    // console.log($(this).val());
+
     if($(this).val() === type){
-      score =+ 10;
-      question();
+      score += 10;
+      console.log(qscore);
+      $('#quizContainer').hide();
+      setTimeout(start, 300);
+      $('#icon1').show();
     } else {
-      question();
+      $('#quizContainer').hide();
+      setTimeout(start, 300);
+      $('#icon1').show();
     }
   });
 
@@ -48,6 +54,11 @@ $(()=> {
       surname: 'Hayden',
       image: 'images/mike.png'
 
+    },
+    'William Tye': {
+      name: 'William',
+      surname: 'Tye',
+      image: 'images/will.jpeg'
     }
 
   };
@@ -73,30 +84,24 @@ $(()=> {
   let $result = $('#result');
   const $lives = $('#lives');
   let score = null;
+  let slices = 0;
+  let bonusTimer = 7;
+  let bonusMode = false;
 
-
-
-  // //adds hearths to the box
-  // function addHearths() {
-  //   $lives.empty();
-  //   for(let i = 0; i<livesLeft; i++){
-  //     $lives.append('<img src="images/hearth.ico" class="life"/>');
-  //
-  //   }
-  // }
 
   //change icon using attr src and random array number
   function chooseIcon(){
     const image = icons[Math.floor(Math.random() * 7)];
+    // console.log('trying to find', image);
     $('#icon1').attr('src' , 'images/' + image +'.png').attr('data-logo', image);
   }
 
 
   //start function -> makes the icon to show up by setting the att source
   function start(){
+    // console.log('inside start');
     //hide new player button user cannot use it while playing
     $newPlayer.hide();
-    console.log('inside start');
     $('#gameOver').hide();
     $lives.show();
 
@@ -111,11 +116,12 @@ $(()=> {
 
 
     //randomize step to increase speed and all of the icons drop with different speed
-    step = 1 + Math.round(Math.random()*2);
+    step = 1 + Math.round(Math.random()*4);
 
 
     //interval set to change top position every 10ms
-    action = setInterval(function(){
+    console.log('starting the setInterval, action:', action);
+    if(!action) action = setInterval(function(){
 
       //changes current top position + step
       $('#icon1').css('top', $('#icon1').position().top + step);
@@ -128,6 +134,7 @@ $(()=> {
 
         if(livesLeft === 0) {
           clearInterval(action);
+          action = null;
           $('#gameOver').show();
           $newPlayer.show();
           return;
@@ -138,40 +145,60 @@ $(()=> {
         $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
         step = 1 + Math.round(Math.random()*2);
         console.log('lost a life');
-
-
-        // if(livesLeft>1) {
-        //   $('#icon1').show();
-        //   chooseIcon();
-        //   $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
-        //   step = 1 + Math.round(Math.random()*2);
-        //   livesLeft--;
-        //   addHearths();
-        //   $lives.show();
-        //   console.log('lost a life');
-        // }else{
-        //   clearInterval(action);
-        //   $('#gameOver').show();
-        //   console.log('game over');
-        //   $newPlayer.show();
-        //
-        // }
       }
     }, 10);
   }
 
   //mouse over function
-  $('#icon1').on('mouseover', function (){
+  $('#icon1').on('mouseout', function (){
+    console.log('mouseover');
     //play sound and increase and display score
-    slice.play();
-    score++;
-    $('.score').html(score);
-    //stop interval for the explode event
-    clearInterval(action);
-    $('#icon1').hide('explode', 400);
-    console.log('hiding the icon');
-    //start timer after the explode event
-    setTimeout(start, 500);
+    if($(this).attr('data-logo')==='android'){
+      clearInterval(action);
+      action = null;
+      $('#quizContainer').show();
+      $('#icon1').hide();
+      question();
+    } else if(($(this).attr('data-logo')==='viber')) {
+
+      clearInterval(action);
+      action = null;
+
+      if(!bonusMode) {
+        const bonus = setInterval(function(){
+
+          bonusTimer --;
+          if(bonusTimer===0) {
+            clearInterval(bonus);
+            score = parseInt(slices)+parseInt(score);
+            slices = 0;
+            bonusMode = false;
+            bonusTimer = 7;
+            $('#slices').hide();
+            setTimeout(start, 400);
+          }
+        }, 1000);
+
+        bonusMode = true;
+      }
+    } else {
+      slice.play();
+      score++;
+      $('.score').html(score);
+      //stop interval for the explode event
+      clearInterval(action);
+      action = null;
+      $('#icon1').hide('explode', 400);
+      // console.log('hiding the icon');
+      //start timer after the explode event
+      setTimeout(start, 500);
+    }
+
+    if (bonusMode && bonusTimer > 0) {
+      slices ++;
+      $('#slices').show();
+      $('#slices').text(`Slices: ${slices}`);
+    }
   });
 
   //game buttons
@@ -205,7 +232,7 @@ $(()=> {
     $PlayerFace.css('background-image',`url(${img})`);
     $playerInformation.find('.name').text(player.name);
     $playerInformation.find('.level').text('Newbie');
-    console.log($PlayerFace, $playerInformation, $current);
+    // console.log($PlayerFace, $playerInformation, $current);
   }
   // clean from function
   function cleanForm() {

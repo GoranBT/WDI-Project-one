@@ -187,7 +187,7 @@ nav ul li .child {
   overflow: hidden;
 
 }
-.quizContaier {
+#quizContainer {
   min-width: 300px;
   min-height: 250px;
   background-color: blue;
@@ -204,6 +204,7 @@ nav ul li .child {
     position: absolute;
     height: 50px;
     width: 50px;
+    display: none;
   }
 }
 
