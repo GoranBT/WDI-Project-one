@@ -65,6 +65,7 @@ $(()=> {
 
   // variables
   let $currentTime = null;
+  const $form = $('form');
   const $newPlayer = $('.newplayer');
   const $PlayerFace = $('.pImage');
   const $playerInformation = $('.player-info');
@@ -87,6 +88,8 @@ $(()=> {
   let slices = 0;
   let bonusTimer = 7;
   let bonusMode = false;
+  const $start = $('#start');
+  const $reset = $('#reset');
 
 
   //change icon using attr src and random array number
@@ -202,8 +205,8 @@ $(()=> {
   });
 
   //game buttons
-  $('#start').on('click', start);
-  $('#reset').on('click', function () {
+  $start.on('click', start);
+  $reset.on('click', function () {
     $('#gameOver').hide();
     $('.score').text(0);
     $lives.find('img').show();
@@ -220,8 +223,8 @@ $(()=> {
 
   // submit login function
   function submitLogin(event){
-    $('#start').show();
-    $('#reset').show();
+    $start.show();
+    $reset.show();
     const $current = $(event.currentTarget);
     player.name = $current.find('input[name="name"]').val();
     player.surname = $current.find('input[name="surname"]').val();
@@ -242,31 +245,44 @@ $(()=> {
     $playerInformation.find('.surname').text(' ');
     $playerInformation.find('.age').text(' ');
     $playerInformation.hide();
-    $('form').show();
-    $('#start').hide();
-    $('#reset').hide();
+    $form.show();
+    $start.hide();
+    $reset.hide();
   }
+
   // buttons onclick
-  $('form').bind('submit', submitLogin);
-  $newPlayer.click(cleanForm);
+
+  $form.bind('submit', submitLogin);
+  $newPlayer.on('click', cleanForm);
 
   //DropDown elements
+
   $('ul.parent > li').hover(function() {
     $(this).find('ul.child').show(400);
   }, function () {
     $(this).find('ul.child').hide(400);
   });
 
-  //Audio Player
-  $('.player').on('click', function(){
+
+  //audio Player functions
+  function playMusic(){
     if(myAudio.paused) {
       myAudio.play();
     } else {
       myAudio.pause();
       myAudio.currentTime = 0;
     }
-    $('.player').toggleClass('pulse');
-  });
+  }
+
+  function pulse(){
+    $audioPlayer.toggleClass('pulse');
+  }
+
+  //Audio Player
+  const $audioPlayer = $('.player');
+  $audioPlayer.on('click', playMusic);
+  $audioPlayer.on('click', pulse);
+
 
 
   $('.logo').toggleClass('animated shake');
