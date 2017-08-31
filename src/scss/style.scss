@@ -87,12 +87,12 @@ header {
 .page {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
   margin: 0 auto;
 
   // left column
   .columnLeft{
     width: 20%;
+    height: 80vh;
     display: flex;
     justify-content: center;
 
@@ -198,8 +198,7 @@ header {
       }
       //main container
       #mainGameContainer {
-        height: 500px;
-        // min-width: 700px;
+        height: 70vh;
         width: 100%;
         background-image: url('../images/back.jpg');
         background-position: center;
@@ -308,6 +307,7 @@ button:hover {
 // ............
 //Right column
 .columnRight {
+  height: 80vh;
   width: 20%;
   display: flex;
   justify-content: center;
@@ -357,7 +357,7 @@ button:hover {
     }
   }
 
-// Form section
+  // Form section
   .formContainer {
     width: 100%;
     display: flex;
