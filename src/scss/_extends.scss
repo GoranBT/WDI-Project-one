@@ -5,9 +5,22 @@
   justify-content: space-between;
   margin: 0 30px;
 }
-.effect1{
+
+.effect1 {
   border: 2px solid gray;
     -webkit-box-shadow: 0 10px 6px -6px #777;
        -moz-box-shadow: 0 10px 6px -6px #777;
             box-shadow: 0 10px 6px -6px #777;
+}
+
+.backgroundImage {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
