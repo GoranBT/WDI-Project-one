@@ -1,8 +1,12 @@
 
 $(()=> {
 //test
-  var quiz = [
-
+  const quote = ['Never trust a computer you can\'t throw out a window.', 'It\'s hardware that makes a machine fast. It\'s software that makes a fast machine slow.', 'The real danger is not that computers will begin to think like men, but that men will begin to think like computers.', 'People don\'t understand computers. Computers are magical boxes that do things. People believe what computers tell them.', 'Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.', 'The trouble with programmers is that you can never tell what a programmer is doing until it’s too late.', 'Measuring programming progress by lines of code is like measuring aircraft building progress by weight.','Programming is like kicking yourself in the face, sooner or later your nose will bleed.', 'When someone says: \'I want a programming language in which I need only say what I wish done\', give him a lollipop.'];
+  const myAudio = new Audio('images/audio1.mp3');
+  const slice = new Audio('images/slice.mp3');
+  let type=null;
+  const player = {};
+  const quiz = [
     {
       'question': 'true||false',
       'answer': 'true'
@@ -11,38 +15,7 @@ $(()=> {
       'question': 'true&&false',
       'answer': 'false'
     }
-
   ];
-  var type=null;
-  var qscore = 12;
-
-  function question(){
-    var selection = quiz[Math.floor(Math.random() * 2)];
-    type = selection.answer;
-    $('.question').html(`${selection.question}`);
-  }
-
-  $('.quizButtons').on('click', function(){
-    // console.log($(this).val());
-
-    if($(this).val() === type){
-      score += 10;
-      console.log(qscore);
-      $('#quizContainer').hide();
-      setTimeout(start, 300);
-      $('#icon1').show();
-    } else {
-      $('#quizContainer').hide();
-      setTimeout(start, 300);
-      $('#icon1').show();
-    }
-  });
-
-  //end of test for today
-
-  const myAudio = new Audio('images/audio1.mp3');
-  const slice = new Audio('images/slice.mp3');
-  // test object
   const users = {
     'Goran Angelovski': {
       name: 'Goran',
@@ -62,163 +35,221 @@ $(()=> {
     }
 
   };
+  let livesLeft = 3;
+  let step = null;
+  let action = null;
+  let score = null;
+  let slices = 0;
+  let bonusTimer = 7;
+  let bonusMode = false;
+  const icons =['amazon', 'android', 'google', 'twitter', 'viber', 'whatsup', 'windows'];
 
-  // variables
+  //jquery var
+  const $quizQuestion = $('.question');
+  const $quizButton = $('.quizButtons');
+  const $audioPlayer = $('.player');
   let $currentTime = null;
   const $form = $('form');
   const $newPlayer = $('.newplayer');
   const $PlayerFace = $('.pImage');
   const $playerInformation = $('.player-info');
   const $quotes = $('.quotes');
-  const quote = ['Never trust a computer you can\'t throw out a window.', 'It\'s hardware that makes a machine fast. It\'s software that makes a fast machine slow.', 'The real danger is not that computers will begin to think like men, but that men will begin to think like computers.', 'People don\'t understand computers. Computers are magical boxes that do things. People believe what computers tell them.', 'Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.', 'The trouble with programmers is that you can never tell what a programmer is doing until it’s too late.', 'Measuring programming progress by lines of code is like measuring aircraft building progress by weight.','Programming is like kicking yourself in the face, sooner or later your nose will bleed.', 'When someone says: \'I want a programming language in which I need only say what I wish done\', give him a lollipop.'];
-  const random = Math.floor(Math.random()*quote.length);
-  $quotes.html(`<p>${quote[random]}</p>`);
-
-  const player = {};
-
-  //Game variables
-  let livesLeft = null;
-  let step = null;
-  let action = null;
-  //icons
-  const icons =['amazon', 'android', 'google', 'twitter', 'viber', 'whatsup', 'windows'];
-  let $result = $('#result');
   const $lives = $('#lives');
-  let score = null;
-  let slices = 0;
-  let bonusTimer = 7;
-  let bonusMode = false;
   const $start = $('#start');
   const $reset = $('#reset');
+  const $timeWindow = $('.time');
+  const $slicesWin = $('#slices');
+  const $quizContainer = $('#quizContainer');
+  const $icon = $('#icon1');
+  const $gameOverWin = $('#gameOver');
+  const $iconContainer = $('#iconsContainer');
+  const $scoreBox = $('.score');
+  const $logo = $('.logo');
+  const $submit = $('.submit');
 
+
+  // tired of Math.floor(Math.random()*length); so i decided to make a function
+  function randomN(length) {
+    return Math.floor(Math.random()*length);
+  }
+  //functions
+  function displayScore(){
+    $scoreBox.html(score);
+  }
+
+  function question(){
+    var selection = quiz[randomN(quiz.length)];
+    type = selection.answer;
+    $quizQuestion.html(`${selection.question}`);
+  }
+
+  $quizButton.on('click', quizLogic);
+
+  function quizLogic() {
+    if($(this).val() === type){
+      score += 10;
+      $quizContainer.hide();
+      setTimeout(start, 300);
+      $icon.show();
+    } else {
+      $quizContainer.hide();
+      setTimeout(start, 300);
+      $icon.show();
+    }
+  }
+
+  $quotes.html(`<p>${quote[randomN(quote.length)]}</p>`);
 
   //change icon using attr src and random array number
   function chooseIcon(){
-    const image = icons[Math.floor(Math.random() * 7)];
-    // console.log('trying to find', image);
-    $('#icon1').attr('src' , 'images/' + image +'.png').attr('data-logo', image);
+    const image = icons[randomN(icons.length)];
+    $icon.attr('src' , 'images/' + image +'.png').attr('data-logo', image);
   }
 
+
+  function randomIcon(){
+
+    chooseIcon();
+    $icon.show();
+    $icon.css({'left': randomN($iconContainer.width()-50) ,'top': -50});
+    step = 1 + randomN(4);
+  }
 
   //start function -> makes the icon to show up by setting the att source
   function start(){
-    // console.log('inside start');
-    //hide new player button user cannot use it while playing
+    $start.attr('disabled', true);
+    $reset.attr('disabled', true);
     $newPlayer.hide();
-    $('#gameOver').hide();
-    $lives.show();
+    randomIcon();
 
-    //populate lives inside box and show random icon
-    livesLeft = 3;
-    // addHearths();
-    $('#icon1').show();
-    chooseIcon();
-
-    //choose random icon start position
-    $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
-
-
-    //randomize step to increase speed and all of the icons drop with different speed
-    step = 1 + Math.round(Math.random()*4);
-
-
+    function makingMove(){
+      $icon.css('top', $($icon).position().top + step);
+    }
     //interval set to change top position every 10ms
-    console.log('starting the setInterval, action:', action);
-    if(!action) action = setInterval(function(){
-
-      //changes current top position + step
-      $('#icon1').css('top', $('#icon1').position().top + step);
-
-      //condition checking what heppens when icon position is > contaier
-      if($('#icon1').position().top > $('#iconsContainer').height()) {
+    function checkPosition(){
+      if($($icon).position().top > $iconContainer.height()) {
 
         livesLeft--;
+        console.log(livesLeft);
         $lives.find('img').slice(0, 3-livesLeft).hide();
 
         if(livesLeft === 0) {
-          clearInterval(action);
-          action = null;
-          $('#gameOver').show();
-          $newPlayer.show();
-          return;
+          gameOver();
         }
-
-        $('#icon1').show();
-        chooseIcon();
-        $('#icon1').css({'left': Math.round(Math.random()*550) ,'top': -50});
-        step = 1 + Math.round(Math.random()*2);
-        console.log('lost a life');
+        randomIcon();
       }
+    }
+
+
+
+    if(!action) action = setInterval(function(){
+
+      makingMove();
+
+      checkPosition();
+
     }, 10);
   }
 
-  //mouse over function
-  $('#icon1').on('mouseout', function (){
-    console.log('mouseover');
-    //play sound and increase and display score
-    if($(this).attr('data-logo')==='android'){
-      clearInterval(action);
-      action = null;
-      $('#quizContainer').show();
-      $('#icon1').hide();
-      question();
-    } else if(($(this).attr('data-logo')==='viber')) {
+  function gameOver(){
+    clearInterval(action);
+    action = null;
+    $gameOverWin.show();
+    $newPlayer.show();
+    $reset.attr('disabled', false);
+    $start.attr('disabled', true);
+  }
 
-      clearInterval(action);
-      action = null;
+  $icon.on('mouseout', checkID);
 
-      if(!bonusMode) {
-        const bonus = setInterval(function(){
+  function android() {
+    clearInterval(action);
+    action = null;
+    $quizContainer.show();
+    $icon.hide();
+    question();
+    displayScore();
+  }
 
-          bonusTimer --;
-          if(bonusTimer===0) {
-            clearInterval(bonus);
-            score = parseInt(slices)+parseInt(score);
-            slices = 0;
-            bonusMode = false;
-            bonusTimer = 7;
-            $('#slices').hide();
-            setTimeout(start, 400);
-          }
-        }, 1000);
+  function viber(){
+    clearInterval(action);
+    action = null;
+    if(!bonusMode) {
+      const bonus = setInterval(function(){
 
-        bonusMode = true;
-      }
-    } else {
-      slice.play();
-      score++;
-      $('.score').html(score);
-      //stop interval for the explode event
-      clearInterval(action);
-      action = null;
-      $('#icon1').hide('explode', 400);
-      // console.log('hiding the icon');
-      //start timer after the explode event
-      setTimeout(start, 500);
+        bonusTimer --;
+        if(bonusTimer===0) {
+          clearInterval(bonus);
+          score = parseInt(slices)+parseInt(score);
+          slices = 0;
+          bonusMode = false;
+          bonusTimer = 7;
+          $slicesWin.hide();
+          setTimeout(start, 400);
+          displayScore();
+        }
+      }, 1000);
+
+      bonusMode = true;
     }
+  }
 
+  function defaultCase(){
+    slice.play();
+    score++;
+    displayScore();
+    //stop interval for the explode event
+    clearInterval(action);
+    action = null;
+    $icon.hide('explode', 400);
+    // console.log('hiding the icon');
+    //start timer after the explode event
+    setTimeout(start, 500);
+  }
+
+  function bonusCheck(){
     if (bonusMode && bonusTimer > 0) {
       slices ++;
-      $('#slices').show();
-      $('#slices').text(`Slices: ${slices}`);
+      $slicesWin.show();
+      $slicesWin.text(`Slices: ${slices}`);
+      displayScore();
     }
-  });
+  }
+
+  function checkID(){
+    switch ($(this).attr('data-logo')) {
+      case 'android':
+        android();
+        break;
+      case 'viber':
+        viber();
+        break;
+      default:
+        defaultCase();
+    }
+    bonusCheck();
+  }
+
+  function resetButton() {
+    $gameOverWin.hide();
+    $scoreBox.text(0);
+    $lives.find('img').show();
+    livesLeft = 3;
+    $start.attr('disabled', false);
+
+  }
 
   //game buttons
   $start.on('click', start);
-  $reset.on('click', function () {
-    $('#gameOver').hide();
-    $('.score').text(0);
-    $lives.find('img').show();
-    livesLeft = 3;
-  });
+
+  $reset.on('click', resetButton);
 
 
   // Timer get and show the time
   setInterval(function time() {
     $currentTime = new Date();
-    var timeString = $currentTime.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
-    $('.time').text(timeString);
+    const timeString = $currentTime.toString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+    $timeWindow.text(timeString);
   }, 1000);
 
   // submit login function
@@ -277,15 +308,12 @@ $(()=> {
   function pulse(){
     $audioPlayer.toggleClass('pulse');
   }
-
   //Audio Player
-  const $audioPlayer = $('.player');
   $audioPlayer.on('click', playMusic);
   $audioPlayer.on('click', pulse);
-
-
-
-  $('.logo').toggleClass('animated shake');
-  $('.submit').toggleClass('animated pulse infinite');
+  //shake logo on page load
+  $logo.toggleClass('animated shake');
+  //pulsing submit button
+  $submit.toggleClass('animated pulse infinite');
 
 });
