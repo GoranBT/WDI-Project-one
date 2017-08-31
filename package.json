@@ -39,7 +39,7 @@
       "css": "**/*.css",
       "scss": "**/*.scss",
       "html": "**/*.html",
-      "images": "**/*.{png,jpg,jpeg,gif,ico,mp3}"
+      "images": "**/*.{png,jpg,jpeg,gif,ico,mp3,svg}"
     }
   },
   "devDependencies": {

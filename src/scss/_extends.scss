@@ -1,0 +1,13 @@
+.flex-styles {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  margin: 0 30px;
+}
+.effect1{
+  border: 2px solid gray;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+       -moz-box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 10px 6px -6px #777;
+}

@@ -1,17 +1,22 @@
+@import "extends";
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Helvetica;
+  color: white;
 }
 
-body {
-  background:#ccc;
+html {
+  background-image: url('../images/background5.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  hight: 100%;
 }
-//just a border box class
-.box {
-  border: 2px solid red;
-}
+// just a border box class
+// .box {
+//   border: 2px solid red;
+// }
 
 .flexContainer {
   display: flex;
@@ -22,8 +27,13 @@ body {
 // Header style
 
 header {
-  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
   width: 100%;
+  border-bottom: 3px solid gray;
+  background-color: #151313;
   //Logo
   .logo{
     display: flex;
@@ -37,21 +47,21 @@ header {
   }
   //Navigation
   nav {
-    margin-right: 35px;
+    margin-right: 100px;
     ul {
       text-decoration: none;
       li {
         position: relative;
         text-decoration: none;
         display: inline-block;
-        padding: 0 10px;
+        padding: 0 25px;
         .child {
           text-decoration: none;
           display: none;
           position: absolute;
           background-color: rgba(192, 192, 192, 0.9);
-          font-size: 14px;
-          width: 100%!important;
+          font-size: 20px;
+          width: 200px;
           border-radius: 5px;
           z-index: 1;
 
@@ -64,8 +74,16 @@ header {
     }
   }
 }
-// Page style
 
+//title
+.title {
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Berkshire Swash', cursive;
+  margin: 15px auto;
+}
+
+// Page style
 .page {
   display: flex;
   flex-wrap: wrap;
@@ -89,6 +107,7 @@ header {
 
       //quotes
       .quotes {
+        font-family: 'Gloria Hallelujah', cursive;
         font-size: 16px;
         text-align: center;
         line-height: 2.3;
@@ -99,6 +118,8 @@ header {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        border-radius: 15%;
+        @extend.effect1;
       }
       //classes used for pulse animation
       .animated {
@@ -116,12 +137,13 @@ header {
       .player {
         width: 90%;
         height: 30%;
-        background-color: #ccf;
+        background-color: #2e2e2e;
         display: flex;
         justify-content: center;
         align-items: flex-end;
         background-image: url('../images/audio3.jpg');
         background-position: center;
+        background-repeat: no-repeat;
         background-size: cover;
       }
     }
@@ -132,27 +154,28 @@ header {
     width: 60%;
     text-align: center;
 
-    // Code Ninja title
-    .title {
-      font-size: 20px;
-    }
-
     //middle column wrapper
     .wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-
+      border-radius: 5%;
+      .main {
+        width: 100%;
+        border-radius: 5%;
+      }
       //lives and score section
       .livesScoreWraper {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        @extend .flex-styles;
         //ives container
         #lives {
           height: 20px;
           width: 120px;
-          background-color: blue;
+          background-color: #2e2e2e;
           border-radius: 10px;
           position: relative;
           display: inline-block;
@@ -163,21 +186,31 @@ header {
             height: 16px;
             margin: 0 5px;
           }
+
+          @extend.effect1;
+        }
+        .scoreBox {
+          padding: 1px 10px;
+          background-color: #2e2e2e;
+          border-radius: 10px;
+          @extend.effect1;
         }
       }
       //main container
       #mainGameContainer {
-        min-height: 500px;
-        min-width: 700px;
+        height: 500px;
+        // min-width: 700px;
+        width: 100%;
         background-image: url('../images/back.jpg');
         background-position: center;
         background-size: cover;
         position: relative;
         border-radius: 5%;
         overflow: hidden;
+
         //icons container
         #iconsContainer {
-          height: 500px;
+          height: 100%;
           width: 100%;
           position: absolute;
           border-radius: 5%;
@@ -197,13 +230,26 @@ header {
           }
           //quiz container default hidden shows when bonus icon been cut
           #quizContainer {
-            min-width: 300px;
-            min-height: 250px;
-            background-color: blue;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            background-image: url('../images/board.png');
+            background-size: cover;
+            background-position: center;
             z-index: 5;
-            display: none;
+            height: 99%;
+            position: absolute;
+            width: 80%;
+            top: 1%;
+            left: 10%;
+            display: flex;
+            flex-direction: column;
+            &.hidden {
+              display: none;
+            }
+            //game over container default hidden shows when game over
           }
-          //game over container default hidden shows when game over
           #gameOver {
             min-width: 100%;
             min-height: 100%;
@@ -215,24 +261,24 @@ header {
             position: absolute;
             display: none;
             border-radius: 5%;
-            z-index: 3;
+            z-index: 7;
           }
         }
+        @extend.effect1;
       }
+
     }
     // button wrapper
     .buttonWrapper{
       min-height: 50px;
+      @extend .flex-styles;
     }
+
   }
 }
 
 .livesScoreWraper, .buttonWrapper, .tittle {
-  width: 100%;
-  display: flex;
-  padding: 10px;
-  justify-content: space-between;
-  margin: 0 30px;
+  @extend .flex-styles;
 }
 
 //Start reset button style
@@ -244,6 +290,11 @@ button {
   padding:0 10px;
   font-size: 20px;
   border-radius: 20px;
+  background-color: #151313;
+  @extend .effect1;
+}
+button:hover {
+  background-color:lighten( #151313, 25% );
 }
 // hiding buttons
 #start, #reset {
@@ -284,6 +335,7 @@ button {
 
     // player information name score lvl container
     .player-info {
+      width:100%;
       height: 80%;
       display: flex;
       justify-content: center;
@@ -293,22 +345,31 @@ button {
       div {
         margin: 30px 20px;
       }
-    }
 
+    }
+    @extend .effect1;
     //time container
-    .dateTime {
-      width: 100%;
-      height: 20%;
+    .div{
+      .dateTime {
+        width: 100%;
+        height: 20%;
+      }
     }
   }
 
 // Form section
-  form {
-    width: 80%;
-    height: 80%;
+  .formContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    form {
+      width: 80%;
+      height: 80%;
 
-    input {
-      margin: 15px 0;
+      input {
+        margin: 15px 0;
+        color: black;
+      }
     }
   }
 }
@@ -334,12 +395,18 @@ button {
     background-size: cover;
     background-position: center;
   }
+  @extend.effect1;
 }
 // .............
 //Footer
 footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #151313;
   width: 100%;
   height: 40px;
+  border-top: 3px solid gray;
 
   //footer made by
   #madeBy {
@@ -379,4 +446,57 @@ footer {
       transform: rotate(360deg);
     }
   }
+
+}
+
+
+@media only screen and (max-width: 950px) {
+  .page {
+
+    .columnLeft{
+      display: none;
+    }
+    .columnRight{
+      width:30%;
+    }
+    .columnMiddle{
+      width: 70%;
+    }
+  }
+}
+
+@media only screen and (max-width: 750px){
+  header{
+    display: flex;
+    justify-content: center;
+    nav{
+      display: none;
+    }
+  }
+
+  .page {
+
+    .columnLeft{
+      display: none;
+    }
+    .columnRight{
+      display: none;
+    }
+    .columnMiddle{
+      width: 100%;
+    }
+    #reset, #start{
+      display: flex;
+    }
+  }
+  footer {
+    padding-top: 5px;
+    display: flex;
+    justify-content: center;
+    nav{
+      display: none;
+    }
+
+  }
+
 }

@@ -1,146 +1,192 @@
+//variables
 
-$(()=> {
-//test
-  const quote = ['Never trust a computer you can\'t throw out a window.', 'It\'s hardware that makes a machine fast. It\'s software that makes a fast machine slow.', 'The real danger is not that computers will begin to think like men, but that men will begin to think like computers.', 'People don\'t understand computers. Computers are magical boxes that do things. People believe what computers tell them.', 'Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.', 'The trouble with programmers is that you can never tell what a programmer is doing until it’s too late.', 'Measuring programming progress by lines of code is like measuring aircraft building progress by weight.','Programming is like kicking yourself in the face, sooner or later your nose will bleed.', 'When someone says: \'I want a programming language in which I need only say what I wish done\', give him a lollipop.'];
-  const myAudio = new Audio('images/audio1.mp3');
-  const slice = new Audio('images/slice.mp3');
-  let type=null;
-  const player = {};
-  const quiz = [
-    {
-      'question': 'true||false',
-      'answer': 'true'
-    },
-    {
-      'question': 'true&&false',
-      'answer': 'false'
-    }
-  ];
-  const users = {
-    'Goran Angelovski': {
-      name: 'Goran',
-      surname: 'Angelovski',
-      image: 'images/goran.jpg'
-    },
-    'Mike Hayden': {
-      name: 'Mike',
-      surname: 'Hayden',
-      image: 'images/mike.png'
+//array holding all of the quots used for the quote of the day
+const quote = ['Never trust a computer you can\'t throw out a window.', 'It\'s hardware that makes a machine fast. It\'s software that makes a fast machine slow.', 'The real danger is not that computers will begin to think like men, but that men will begin to think like computers.', 'People don\'t understand computers. Computers are magical boxes that do things. People believe what computers tell them.', 'Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.', 'The trouble with programmers is that you can never tell what a programmer is doing until it’s too late.', 'Measuring programming progress by lines of code is like measuring aircraft building progress by weight.','Programming is like kicking yourself in the face, sooner or later your nose will bleed.', 'When someone says: \'I want a programming language in which I need only say what I wish done\', give him a lollipop.'];
 
-    },
-    'William Tye': {
-      name: 'William',
-      surname: 'Tye',
-      image: 'images/will.jpeg'
-    }
+//Audio elements
+const myAudio = new Audio('images/audio1.mp3');
+const slice = new Audio('images/slice.mp3');
 
-  };
-  let livesLeft = 3;
-  let step = null;
-  let action = null;
-  let score = null;
-  let slices = 0;
-  let bonusTimer = 7;
-  let bonusMode = false;
-  const icons =['amazon', 'android', 'google', 'twitter', 'viber', 'whatsup', 'windows'];
+// ------------
+//Quizz section
+let type=null;
+const player = {};
 
+// questions and answers
+const quiz = [
+  {
+    'question': 'true||false',
+    'answer': 'true'
+  },
+  {
+    'question': 'true&&false',
+    'answer': 'false'
+  }
+];
+
+//Users
+const users = {
+  'Goran Angelovski': {
+    name: 'Goran',
+    surname: 'Angelovski',
+    image: 'images/goran.jpg'
+  },
+  'Mike Hayden': {
+    name: 'Mike',
+    surname: 'Hayden',
+    image: 'images/mike.png'
+
+  },
+  'William Tye': {
+    name: 'William',
+    surname: 'Tye',
+    image: 'images/will.jpeg'
+  }
+
+};
+
+//Game variables
+let livesLeft = 3;
+let step = null;
+let action = null;
+let score = null;
+let slices = 0;
+let bonusTimer = 7;
+let bonusMode = false;
+//array holding all of the icon IDs
+const icons =['angularjs', 'apple', 'c', 'css3', 'gulp', 'html5', 'java','nodejs', 'python', 'rails', 'react', 'ruby', 'slack', 'GA', 'Meat'];
+
+// tired of Math.floor(Math.random()*length); so i decided to make a function
+function randomN(length) {
+  return Math.floor(Math.random()*length);
+}
+
+//audio Player functions
+function playMusic(){
+  if(myAudio.paused) {
+    myAudio.play();
+  } else {
+    myAudio.pause();
+    myAudio.currentTime = 0;
+  }
+}
+
+//jQuery
+
+function init(){
+
+  // ----------
   //jquery var
+
+  // quotes
+  const $quotes = $('.quotes');
+
+  // quiz
+  const $quizContainer = $('#quizContainer');
   const $quizQuestion = $('.question');
   const $quizButton = $('.quizButtons');
+
+  //audio
   const $audioPlayer = $('.player');
+
+  // time
   let $currentTime = null;
+  const $timeWindow = $('.time');
+
+  //game variables
   const $form = $('form');
   const $newPlayer = $('.newplayer');
   const $PlayerFace = $('.pImage');
   const $playerInformation = $('.player-info');
-  const $quotes = $('.quotes');
   const $lives = $('#lives');
   const $start = $('#start');
   const $reset = $('#reset');
-  const $timeWindow = $('.time');
   const $slicesWin = $('#slices');
-  const $quizContainer = $('#quizContainer');
   const $icon = $('#icon1');
   const $gameOverWin = $('#gameOver');
   const $iconContainer = $('#iconsContainer');
   const $scoreBox = $('.score');
+
+  //used for logo shaking
   const $logo = $('.logo');
+
+  //used for pulsing button
   const $submit = $('.submit');
 
+  // ----------
+  //Functions
 
-  // tired of Math.floor(Math.random()*length); so i decided to make a function
-  function randomN(length) {
-    return Math.floor(Math.random()*length);
+
+  //makes audio player to pulse
+  function pulse(){
+    $audioPlayer.toggleClass('pulse');
   }
-  //functions
+
+  //display Score
   function displayScore(){
     $scoreBox.html(score);
   }
 
+  //generate random question
   function question(){
     var selection = quiz[randomN(quiz.length)];
     type = selection.answer;
     $quizQuestion.html(`${selection.question}`);
   }
 
-  $quizButton.on('click', quizLogic);
-
+  //quiz logic
   function quizLogic() {
     if($(this).val() === type){
       score += 10;
-      $quizContainer.hide();
-      setTimeout(start, 300);
+      $quizContainer.addClass('hidden');
+      setTimeout(start, 500);
       $icon.show();
     } else {
-      $quizContainer.hide();
-      setTimeout(start, 300);
+      $quizContainer.addClass('hidden');
+      setTimeout(start, 500);
       $icon.show();
     }
   }
 
-  $quotes.html(`<p>${quote[randomN(quote.length)]}</p>`);
-
   //change icon using attr src and random array number
   function chooseIcon(){
     const image = icons[randomN(icons.length)];
-    $icon.attr('src' , 'images/' + image +'.png').attr('data-logo', image);
+    $icon.attr('src' , 'images/' + image +'.svg').attr('data-logo', image);
   }
 
-
+  // setting the position and random step
   function randomIcon(){
-
     chooseIcon();
     $icon.show();
     $icon.css({'left': randomN($iconContainer.width()-50) ,'top': -50});
     step = 1 + randomN(4);
   }
 
-  //start function -> makes the icon to show up by setting the att source
+  //define the speed of icon
+  function makingMove(){
+    $icon.css('top', $($icon).position().top + step);
+  }
+
+  //logic what happens when icon drops under line
+  function checkPosition(){
+    if($icon.position().top > $iconContainer.height()) {
+
+      livesLeft--;
+      $lives.find('img').slice(0, 3-livesLeft).hide();
+
+      if(livesLeft === 0) {
+        gameOver();
+      }
+      randomIcon();
+    }
+  }
+
+  //start function
   function start(){
     $start.attr('disabled', true);
     $reset.attr('disabled', true);
     $newPlayer.hide();
     randomIcon();
-
-    function makingMove(){
-      $icon.css('top', $($icon).position().top + step);
-    }
-    //interval set to change top position every 10ms
-    function checkPosition(){
-      if($($icon).position().top > $iconContainer.height()) {
-
-        livesLeft--;
-        console.log(livesLeft);
-        $lives.find('img').slice(0, 3-livesLeft).hide();
-
-        if(livesLeft === 0) {
-          gameOver();
-        }
-        randomIcon();
-      }
-    }
-
-
 
     if(!action) action = setInterval(function(){
 
@@ -151,6 +197,7 @@ $(()=> {
     }, 10);
   }
 
+  //Game over
   function gameOver(){
     clearInterval(action);
     action = null;
@@ -160,18 +207,18 @@ $(()=> {
     $start.attr('disabled', true);
   }
 
-  $icon.on('mouseout', checkID);
-
-  function android() {
+  //bonus question
+  function ga() {
     clearInterval(action);
     action = null;
-    $quizContainer.show();
+    $quizContainer.removeClass('hidden');
     $icon.hide();
     question();
     displayScore();
   }
 
-  function viber(){
+  //bonus slicing icon
+  function meat(){
     clearInterval(action);
     action = null;
     if(!bonusMode) {
@@ -185,15 +232,16 @@ $(()=> {
           bonusMode = false;
           bonusTimer = 7;
           $slicesWin.hide();
-          setTimeout(start, 400);
+          setTimeout(start, 600);
           displayScore();
         }
-      }, 1000);
+      }, 500);
 
       bonusMode = true;
     }
   }
 
+  //normal card procesing
   function defaultCase(){
     slice.play();
     score++;
@@ -207,6 +255,7 @@ $(()=> {
     setTimeout(start, 500);
   }
 
+  //checking if we are in bonus mode
   function bonusCheck(){
     if (bonusMode && bonusTimer > 0) {
       slices ++;
@@ -216,13 +265,14 @@ $(()=> {
     }
   }
 
+  //function that check the ID of the icons
   function checkID(){
     switch ($(this).attr('data-logo')) {
-      case 'android':
-        android();
+      case 'GA':
+        ga();
         break;
-      case 'viber':
-        viber();
+      case 'Meat':
+        meat();
         break;
       default:
         defaultCase();
@@ -230,20 +280,16 @@ $(()=> {
     bonusCheck();
   }
 
+  //Reset Button function
   function resetButton() {
     $gameOverWin.hide();
-    $scoreBox.text(0);
+    score = 0;
+    displayScore();
     $lives.find('img').show();
     livesLeft = 3;
     $start.attr('disabled', false);
 
   }
-
-  //game buttons
-  $start.on('click', start);
-
-  $reset.on('click', resetButton);
-
 
   // Timer get and show the time
   setInterval(function time() {
@@ -268,6 +314,7 @@ $(()=> {
     $playerInformation.find('.level').text('Newbie');
     // console.log($PlayerFace, $playerInformation, $current);
   }
+
   // clean from function
   function cleanForm() {
     $PlayerFace.css('background-image','none');
@@ -281,39 +328,75 @@ $(()=> {
     $reset.hide();
   }
 
-  // buttons onclick
+  //-----------------
+  //event listeners
 
+
+  //quiz logic event listener
+  $quizButton.on('click', quizLogic);
+
+  //generetas quote of the day
+  $quotes.html(`<p>${quote[randomN(quote.length)]}</p>`);
+
+  console.log($.event.special.swipe);
+
+  $.event.special.swipe.start = function(event) {
+    var data = event.originalEvent.touches ?
+      event.originalEvent.touches[ 0 ] : event;
+
+    return {
+      time: ( new Date() ).getTime(),
+      coords: [ data.pageX, data.pageY ],
+      origin: $( event.target ),
+      clientX: data.clientX,
+      clientY: data.clientY
+    };
+  };
+
+  $.event.special.swipe.stop = function(event) {
+    var data = event.originalEvent.touches ?
+      event.originalEvent.touches[ 0 ] : event;
+
+    return {
+      time: ( new Date() ).getTime(),
+      coords: [ data.pageX, data.pageY ],
+      origin: $( event.target ),
+      clientX: data.clientX,
+      clientY: data.clientY
+    };
+  };
+
+  //mouse out listener
+  $icon.on('mouseout', checkID);
+  $icon.on('swipeleft', checkID);
+  $icon.on('swiperight', checkID);
+
+  //DropDown elements
+  $('ul.parent > li')
+    .hover(function() {
+      $(this).find('ul.child').show(400);
+    }, function () {
+      $(this).find('ul.child').hide(400);
+    });
+
+  //Form and new player buttons
   $form.bind('submit', submitLogin);
   $newPlayer.on('click', cleanForm);
 
-  //DropDown elements
+  //game buttons
+  $start.on('click', start);
+  $reset.on('click', resetButton);
 
-  $('ul.parent > li').hover(function() {
-    $(this).find('ul.child').show(400);
-  }, function () {
-    $(this).find('ul.child').hide(400);
-  });
-
-
-  //audio Player functions
-  function playMusic(){
-    if(myAudio.paused) {
-      myAudio.play();
-    } else {
-      myAudio.pause();
-      myAudio.currentTime = 0;
-    }
-  }
-
-  function pulse(){
-    $audioPlayer.toggleClass('pulse');
-  }
   //Audio Player
   $audioPlayer.on('click', playMusic);
   $audioPlayer.on('click', pulse);
+
   //shake logo on page load
   $logo.toggleClass('animated shake');
+
   //pulsing submit button
   $submit.toggleClass('animated pulse infinite');
 
-});
+}
+
+$(init);

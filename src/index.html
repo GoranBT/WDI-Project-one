@@ -2,12 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WDI Project 1</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Gloria+Hallelujah" rel="stylesheet">
   <!-- inject:js -->
   <!-- endinject -->
   <!-- inject:css -->
@@ -16,7 +19,7 @@
 <body>
 
   <!-- Header section -->
-  <header class="box flexContainer">
+  <header class="box">
 
     <!-- Logo -->
     <div class="logo box">
@@ -27,28 +30,34 @@
     <!-- Navigation -->
     <nav>
       <ul class="parent">
-        <li><a href="#">High Score</a></li>
+        <li><a href="#">About game</a>
+
+          <!-- Drop down -->
+          <ul class="child">
+            <li>Slice icons by using your mouse and get a GA icon to boost your score. Be careful of facebook and instagram icons ,they will put end to your slicing adventure! </li>
+          </ul>
+        </li>
         <li><a href="#">About me</a>
           <!-- Drop down -->
           <ul class="child">
             <li>Nothing inside for now just a GA student creating his first game!</li>
           </ul>
         </li>
-        <li><a href="#">About</a>
-
-          <!-- Drop down -->
-          <ul class="child">
-            <li>Slice icons by your mouse and get a GA icon to boost your score rate. Be careful of facebook and instagram icons ,they are time-wasters and will put end to your slicing adventure! </li>
-          </ul>
-        </li>
+        <li><a href="#">High Score</a></li>
       </ul>
     </nav>
   </header>
   <!-- End of header -->
 
+  <!-- Tittle -->
+  <div class="title">
+    <h2>Code Ninja</h2>
+  </div>
+
   <!-- ******************** -->
   <!-- Main page container -->
   <div class="page box">
+
 
     <!-- ............ -->
     <!-- Left column -->
@@ -70,10 +79,6 @@
 
     <section class="columnMiddle box">
 
-      <!-- Tittle -->
-      <div class="title">
-        <h2>Code Ninja</h2>
-      </div>
 
       <div class="wrapper box">
 
@@ -86,9 +91,9 @@
             <img src="images/hearth.ico" class="life"/>
           </div>
 
-          <div class="score">
+          <div class="scoreBox">
             <!-- Span used to update score -->
-            Score: <span id="result">0</span>
+            Score: <span class="score">0</span>
           </div>
         </div>
 
@@ -99,7 +104,8 @@
               <img id="icon1">
 
               <!-- test -->
-              <div id="quizContainer">
+              <div id="quizContainer" class="hidden">
+
                 <h3>True or False</h3>
                 <div>
                   <p class="question"></p>
@@ -142,7 +148,9 @@
         <div class="playerInfo box">
 
           <!-- time -->
-          <p class="time box"></p>
+          <div>
+            <p class="time box"></p>
+          </div>
 
           <!-- Name score level information container-->
           <div class="player-info box">
@@ -168,36 +176,40 @@
           </div>
 
           <!-- form colection user information default:VISSIBLE-->
-          <form class="box" method="post" onsubmit="return false;">
+          <div class="formContainer">
 
-            <!-- name -->
-            <div class="">
-              <label for="name">Name</label>
-              <input type="text" name="name" value="dhfasdhj" placeholder="Name">
-            </div>
 
-            <!-- surname -->
-            <div class="">
-              <label for="surname">Surname</label>
-              <input type="text" name="surname" value="" placeholder="Surname">
-            </div>
+            <form class="box" method="post" onsubmit="return false;">
 
-            <!-- age -->
-            <label for="age">Age</label>
-            <div class="">
-              <input type="number" name="age" value="" placeholder="Age">
-            </div>
+              <!-- name -->
+              <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" value="dhfasdhj" placeholder="Name">
+              </div>
 
-            <!-- submit button -->
-            <button class="submit" type="submit">Submit</button>
-          </form>
+              <!-- surname -->
+              <div>
+                <label for="surname">Surname</label>
+                <input type="text" name="surname" value="" placeholder="Surname">
+              </div>
+
+              <!-- age -->
+              <label for="age">Age</label>
+              <div>
+                <input type="number" name="age" value="" placeholder="Age">
+              </div>
+
+              <!-- submit button -->
+              <button class="submit" type="submit">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- *************** -->
     <!-- Footer section -->
-    <footer class="box flexContainer">
+    <footer class="box">
 
       <!-- Made by -->
       <span id="madeBy">Made by Goran Angelovski</span>
@@ -205,9 +217,9 @@
       <!-- Footer follow me nav -->
       <nav>
         <ul id="spin2">
-          <li><a href="#"><img  src="images/facebook.png" alt="facebook image"></a></li>
-          <li><a href="#"><img  src="images/twitter.png" alt="twitter image"></a></li>
-          <li><a href="#"><img  src="images/github.png" alt="github image"></a></li>
+          <li><a href="https://www.facebook.com/goran.angelovski.3" target="_blank"><img  src="images/ffacebook.png" alt="facebook image"></a></li>
+          <li><a href="https://twitter.com/Tourist_Helper" target="_blank"><img  src="images/ftwitter.png" alt="twitter image"></a></li>
+          <li><a href="https://github.com/GoranBT" target="_blank"><img  src="images/fgithub.png" alt="github image"></a></li>
         </ul>
       </nav>
     </footer>
