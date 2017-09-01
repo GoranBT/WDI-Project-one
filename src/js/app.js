@@ -4,8 +4,8 @@
 const quote = ['Never trust a computer you can\'t throw out a window.', 'It\'s hardware that makes a machine fast. It\'s software that makes a fast machine slow.', 'The real danger is not that computers will begin to think like men, but that men will begin to think like computers.', 'People don\'t understand computers. Computers are magical boxes that do things. People believe what computers tell them.', 'Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.', 'The trouble with programmers is that you can never tell what a programmer is doing until it’s too late.', 'Measuring programming progress by lines of code is like measuring aircraft building progress by weight.','Programming is like kicking yourself in the face, sooner or later your nose will bleed.', 'When someone says: \'I want a programming language in which I need only say what I wish done\', give him a lollipop.'];
 
 //Audio elements
-const myAudio = new Audio('images/audio1.mp3');
-const slice = new Audio('images/slice.mp3');
+const myAudio = new Audio('public/images/audio1.mp3');
+const slice = new Audio('public/images/slice.mp3');
 // ------------
 //Quizz section
 let type=null;
@@ -53,18 +53,18 @@ const users = {
   'Goran Angelovski': {
     name: 'Goran',
     surname: 'Angelovski',
-    image: 'images/goran.jpg'
+    image: 'public/images/goran.jpg'
   },
   'Mike Hayden': {
     name: 'Mike',
     surname: 'Hayden',
-    image: 'images/mike.png'
+    image: 'public/images/mike.png'
 
   },
   'William Tye': {
     name: 'William',
     surname: 'Tye',
-    image: 'images/will.jpeg'
+    image: 'public/images/will.jpeg'
   }
 
 };
@@ -182,7 +182,7 @@ function init(){
   //change icon using attr src and random array number
   function chooseIcon(){
     const image = icons[randomN(icons.length)];
-    $icon.attr('src' , 'images/' + image +'.svg').attr('data-logo', image);
+    $icon.attr('src' , 'public/images/' + image +'.svg').attr('data-logo', image);
   }
 
   // setting the position and random step

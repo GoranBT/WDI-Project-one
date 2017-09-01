@@ -8,7 +8,7 @@
 }
 
 html body{
-  background-image: url('../images/background5.jpg');
+  background-image: url('/public/images/background5.jpg');
   height: 100%;
   @extend .backgroundImage;
 }
@@ -133,7 +133,7 @@ header {
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        background-image: url('../images/audio3.jpg');
+        background-image: url('/public/images/audio3.jpg');
         @extend .backgroundImage;
       }
       @extend .flexContainer;
@@ -187,7 +187,7 @@ header {
       #mainGameContainer {
         height: 70vh;
         width: 100%;
-        background-image: url('../images/back.jpg');
+        background-image: url('/public/images/back.jpg');
         position: relative;
         border-radius: 5%;
         overflow: hidden;
@@ -218,7 +218,7 @@ header {
             justify-content: center;
             color: white;
             font-size: 18px;
-            background-image: url('../images/board.png');
+            background-image: url('/public/images/board.png');
             z-index: 5;
             height: 99%;
             position: absolute;
@@ -372,7 +372,7 @@ button:hover {
 .playerImage {
   width: 90%;
   height: 30%;
-  background-image: url('../images/ninja.png');
+  background-image: url('/public/images/ninja.png');
   display: flex;
   justify-content: center;
   top: 10px;
@@ -492,4 +492,8 @@ footer {
 
   }
 
+}
+
+.ui-loader {
+  display: none!important;
 }
