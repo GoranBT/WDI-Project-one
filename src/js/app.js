@@ -6,7 +6,6 @@ const quote = ['Never trust a computer you can\'t throw out a window.', 'It\'s h
 //Audio elements
 const myAudio = new Audio('images/audio1.mp3');
 const slice = new Audio('images/slice.mp3');
-
 // ------------
 //Quizz section
 let type=null;
@@ -15,12 +14,37 @@ const player = {};
 // questions and answers
 const quiz = [
   {
-    'question': 'true||false',
+    'question': 'true || false',
     'answer': 'true'
   },
   {
-    'question': 'true&&false',
+    'question': 'true && false',
     'answer': 'false'
+  },
+  { 'question': 'Singing in the shower lowers your cholesterol, heart rate and risk of cancer and heart disease.',
+    'answer': 'false'
+  },
+  {
+    'question': 'In the weightlessness of space, if a frozen pea touches pepsi it will blow up.',
+    'answer': 'true'
+  },
+  {
+    'question': 'The worlds smartest pig memorized the multiplucation tabled up to 12.',
+    'answer': 'True'
+  },
+  {
+    'question': 'Monkeys are related to fish because if need be they can breathe underwater.',
+    'answer': 'False'
+  },
+  {'question': 'An ostrich\'s eye is bigger than its brain.',
+    'answer': 'true'
+  },
+  {
+    'question': 'A jellyfish is 95 percent water.',
+    'answer': 'true'
+  },
+  {'question': 'Camels have three sets of eyelids.',
+    'answer': 'true'
   }
 ];
 
@@ -53,6 +77,8 @@ let score = null;
 let slices = 0;
 let bonusTimer = 7;
 let bonusMode = false;
+let bonus = null;
+let highScore = null;
 //array holding all of the icon IDs
 const icons =['angularjs', 'apple', 'c', 'css3', 'gulp', 'html5', 'java','nodejs', 'python', 'rails', 'react', 'ruby', 'slack', 'GA', 'Meat'];
 
@@ -106,6 +132,7 @@ function init(){
   const $gameOverWin = $('#gameOver');
   const $iconContainer = $('#iconsContainer');
   const $scoreBox = $('.score');
+  const $level = $('.level');
 
   //used for logo shaking
   const $logo = $('.logo');
@@ -115,8 +142,12 @@ function init(){
 
   // ----------
   //Functions
-
-
+  function timerReset(){
+    var highestTimeoutId = setTimeout('');
+    for (var i = 0 ; i < highestTimeoutId ; i++) {
+      clearTimeout(i);
+    }
+  }
   //makes audio player to pulse
   function pulse(){
     $audioPlayer.toggleClass('pulse');
@@ -139,11 +170,11 @@ function init(){
     if($(this).val() === type){
       score += 10;
       $quizContainer.addClass('hidden');
-      setTimeout(start, 500);
+      setTimeout(start, 400);
       $icon.show();
     } else {
       $quizContainer.addClass('hidden');
-      setTimeout(start, 500);
+      setTimeout(start, 400);
       $icon.show();
     }
   }
@@ -159,7 +190,7 @@ function init(){
     chooseIcon();
     $icon.show();
     $icon.css({'left': randomN($iconContainer.width()-50) ,'top': -50});
-    step = 1 + randomN(4);
+    step = 1 + randomN(5);
   }
 
   //define the speed of icon
@@ -167,18 +198,69 @@ function init(){
     $icon.css('top', $($icon).position().top + step);
   }
 
+  //checking lifes
+  function lifes(){
+    $lives.find('img').slice(0, 3-livesLeft).hide();
+    if(livesLeft === 0) {
+      gameOver();
+    }else{
+      randomIcon();
+    }
+  }
+
   //logic what happens when icon drops under line
   function checkPosition(){
     if($icon.position().top > $iconContainer.height()) {
 
       livesLeft--;
-      $lives.find('img').slice(0, 3-livesLeft).hide();
+      lifes();
 
-      if(livesLeft === 0) {
-        gameOver();
-      }
-      randomIcon();
     }
+
+  }
+
+  // changes leveles based on highScore
+  function levelNames(){
+
+    if(highScore<20){
+      $level.html('Novice');
+
+    }else if (highScore<50){
+      $level.html('Rookie');
+
+    }else if (highScore<75){
+      $level.html('Beginner');
+
+
+    }else if (highScore<100){
+      $level.html('Talented');
+
+
+    }else if  (highScore<150){
+      $level.html('Skilled');
+
+
+    }else if (highScore<200){
+      $level.html('Intermediate');
+
+
+    }else if (highScore<250){
+      $level.html('Skillful');
+
+
+    }else if (highScore<300){
+      $level.html('Proficient');
+
+
+    }else if (highScore<400){
+      $level.html('Advanced');
+    }else if (highScore<1000){
+      $level.html('Senior');
+    }else{
+      $level.html('Expert');
+
+    }
+
   }
 
   //start function
@@ -187,7 +269,10 @@ function init(){
     $reset.attr('disabled', true);
     $newPlayer.hide();
     randomIcon();
-
+    levelNames();
+    if(score>highScore){
+      highScore=score;
+    }
     if(!action) action = setInterval(function(){
 
       makingMove();
@@ -199,6 +284,7 @@ function init(){
 
   //Game over
   function gameOver(){
+    timerReset();
     clearInterval(action);
     action = null;
     $gameOverWin.show();
@@ -207,8 +293,12 @@ function init(){
     $start.attr('disabled', true);
   }
 
+
+
   //bonus question
   function ga() {
+    timerReset();
+    bonusMode = false;
     clearInterval(action);
     action = null;
     $quizContainer.removeClass('hidden');
@@ -219,14 +309,17 @@ function init(){
 
   //bonus slicing icon
   function meat(){
+    slice.play();
+    timerReset();
     clearInterval(action);
     action = null;
     if(!bonusMode) {
-      const bonus = setInterval(function(){
+      bonus = setInterval(function(){
 
         bonusTimer --;
         if(bonusTimer===0) {
           clearInterval(bonus);
+          timerReset();
           score = parseInt(slices)+parseInt(score);
           slices = 0;
           bonusMode = false;
@@ -246,6 +339,7 @@ function init(){
     slice.play();
     score++;
     displayScore();
+    timerReset();
     //stop interval for the explode event
     clearInterval(action);
     action = null;
@@ -288,6 +382,8 @@ function init(){
     $lives.find('img').show();
     livesLeft = 3;
     $start.attr('disabled', false);
+    timerReset();
+    clearInterval(action);
 
   }
 
@@ -317,6 +413,8 @@ function init(){
 
   // clean from function
   function cleanForm() {
+    highScore = 0;
+    $level.html('Newbie');
     $PlayerFace.css('background-image','none');
     $playerInformation.find('.level').text('');
     $playerInformation.find('.name').text('');

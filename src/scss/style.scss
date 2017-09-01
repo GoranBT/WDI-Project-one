@@ -74,7 +74,7 @@ header {
 .title {
   text-align: center;
   font-size: 25px;
-  font-family: 'Berkshire Swash', cursive;
+  font-family: 'Berkshire Swash', serif, cursive;
   margin: 15px auto;
 }
 
@@ -83,6 +83,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  padding-bottom: 40px;
 
     // left column
   .columnLeft{
@@ -100,7 +101,7 @@ header {
 
       //quotes
       .quotes {
-        font-family: 'Gloria Hallelujah', cursive;
+        font-family: 'Gloria Hallelujah',serif, cursive;
         font-size: 16px;
         text-align: center;
         line-height: 2.3;
@@ -230,7 +231,11 @@ header {
               display: none;
             }
             h3{
-              padding-bottom: 20px;
+              width: auto;
+            }
+            p{
+              width: 60%;
+              margin: 0 auto;
             }
             .quizButtons{
               margin-top: 20px;
