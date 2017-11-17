@@ -151,12 +151,12 @@ function init(){
     }
   }
 
-  function timerReset(){
-    var highestTimeoutId = setTimeout('');
-    for (var i = 0 ; i < highestTimeoutId ; i++) {
-      clearTimeout(i);
-    }
-  }
+  // function timerReset(){
+  //   var highestTimeoutId = setTimeout('');
+  //   for (var i = 0 ; i < highestTimeoutId ; i++) {
+  //     clearTimeout(i);
+  //   }
+  // }
   //makes audio player to pulse
   function pulse(){
     $audioPlayer.toggleClass('pulse');
