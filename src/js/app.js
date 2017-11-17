@@ -79,8 +79,9 @@ let bonusTimer = 7;
 let bonusMode = false;
 let bonus = null;
 let highScore = null;
+let timers = [];
 //array holding all of the icon IDs
-const icons =['angularjs', 'apple', 'c', 'css3', 'gulp', 'html5', 'java','nodejs', 'python', 'rails', 'react', 'ruby', 'slack', 'GA', 'Meat'];
+const icons =['angularjs', 'apple', 'c', 'css3', 'gulp', 'html5', 'java','nodejs', 'python', 'rails', 'react', 'ruby', 'slack', 'GA', 'meat'];
 
 // tired of Math.floor(Math.random()*length); so i decided to make a function
 function randomN(length) {
@@ -142,6 +143,14 @@ function init(){
 
   // ----------
   //Functions
+  function timerResets(){
+    for (var i = 0; i < timers.length; i++) {
+      console.log(timers);
+      clearTimeout(timers[i]);
+      timers = [];
+    }
+  }
+
   function timerReset(){
     var highestTimeoutId = setTimeout('');
     for (var i = 0 ; i < highestTimeoutId ; i++) {
@@ -160,6 +169,9 @@ function init(){
 
   //generate random question
   function question(){
+    timerResets();
+    bonusMode = false;
+    clearInterval(action);
     var selection = quiz[randomN(quiz.length)];
     type = selection.answer;
     $quizQuestion.html(`${selection.question}`);
@@ -170,11 +182,12 @@ function init(){
     if($(this).val() === type){
       score += 10;
       $quizContainer.addClass('hidden');
-      setTimeout(start, 400);
+      timers.push(setTimeout(start, 400));
       $icon.show();
+      displayScore();
     } else {
       $quizContainer.addClass('hidden');
-      setTimeout(start, 400);
+      timers.push(setTimeout(start, 400));
       $icon.show();
     }
   }
@@ -284,7 +297,8 @@ function init(){
 
   //Game over
   function gameOver(){
-    timerReset();
+    timerResets();
+    console.log(timers);
     clearInterval(action);
     action = null;
     $gameOverWin.show();
@@ -297,7 +311,7 @@ function init(){
 
   //bonus question
   function ga() {
-    timerReset();
+    timerResets();
     bonusMode = false;
     clearInterval(action);
     action = null;
@@ -310,7 +324,7 @@ function init(){
   //bonus slicing icon
   function meat(){
     slice.play();
-    timerReset();
+    timerResets();
     clearInterval(action);
     action = null;
     if(!bonusMode) {
@@ -319,13 +333,13 @@ function init(){
         bonusTimer --;
         if(bonusTimer===0) {
           clearInterval(bonus);
-          timerReset();
+          timerResets();
           score = parseInt(slices)+parseInt(score);
           slices = 0;
           bonusMode = false;
           bonusTimer = 7;
           $slicesWin.hide();
-          setTimeout(start, 600);
+          timers.push(setTimeout(start, 400));
           displayScore();
         }
       }, 500);
@@ -339,14 +353,14 @@ function init(){
     slice.play();
     score++;
     displayScore();
-    timerReset();
+    timerResets();
     //stop interval for the explode event
     clearInterval(action);
     action = null;
     $icon.hide('explode', 400);
     // console.log('hiding the icon');
     //start timer after the explode event
-    setTimeout(start, 500);
+    timers.push(setTimeout(start, 400));
   }
 
   //checking if we are in bonus mode
@@ -365,7 +379,7 @@ function init(){
       case 'GA':
         ga();
         break;
-      case 'Meat':
+      case 'meat':
         meat();
         break;
       default:
@@ -382,7 +396,7 @@ function init(){
     $lives.find('img').show();
     livesLeft = 3;
     $start.attr('disabled', false);
-    timerReset();
+    timerResets();
     clearInterval(action);
 
   }
