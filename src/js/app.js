@@ -170,7 +170,6 @@ function init(){
   //generate random question
   function question(){
     timerResets();
-    bonusMode = false;
     clearInterval(action);
     var selection = quiz[randomN(quiz.length)];
     type = selection.answer;
