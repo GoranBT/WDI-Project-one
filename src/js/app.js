@@ -81,7 +81,7 @@ let bonus = null;
 let highScore = null;
 let timers = [];
 //array holding all of the icon IDs
-const icons =['angularjs', 'apple', 'c', 'css3', 'gulp', 'html5', 'java','nodejs', 'python', 'rails', 'react', 'ruby', 'slack', 'GA'];
+const icons =['angularjs', 'apple', 'c', 'css3', 'gulp', 'html5', 'java','nodejs', 'python', 'rails', 'react', 'ruby', 'slack', 'GA', 'meat'];
 
 // tired of Math.floor(Math.random()*length); so i decided to make a function
 function randomN(length) {
@@ -378,7 +378,7 @@ function init(){
       case 'GA':
         ga();
         break;
-      case 'java':
+      case 'meat':
         meat();
         break;
       default:
